@@ -51,13 +51,13 @@ class CustomTextForm extends StatelessWidget {
                   ? Text(title!, style: titleStyle)
                   : Text(
                       title!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         color: Colors.black,
                       ),
                     ),
             ),
-            SizedBox(height: 2),
+            const SizedBox(height: 2),
           ],
           // because it not redondant
           // ignore: avoid_unnecessary_containers
@@ -72,7 +72,7 @@ class CustomTextForm extends StatelessWidget {
               maxLength: maxLength,
               decoration: InputDecoration(
                 isDense: true,
-                contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 12),
+                contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
                 prefixIcon: prefix,
                 hintText: hintText,
                 fillColor: fillColor,
@@ -84,13 +84,13 @@ class CustomTextForm extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.black,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.blueGrey,
                   ),
                 ),

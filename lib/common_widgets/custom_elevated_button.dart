@@ -20,8 +20,8 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(0.0),
-      margin: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(0.0),
+      margin: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         boxShadow: const [
           BoxShadow(
@@ -31,10 +31,10 @@ class CustomElevatedButton extends StatelessWidget {
           )
         ],
         gradient: color == null
-            ? LinearGradient(
+            ? const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                stops: const [0, 1],
+                stops: [0, 1],
                 colors: [gradientStart, gradientEnd],
               )
             : null,
@@ -47,7 +47,7 @@ class CustomElevatedButton extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(Colors.transparent),
           minimumSize: MaterialStateProperty.all(Size(minWidth, minHeight)),
           shadowColor: MaterialStateProperty.all(Colors.transparent),
-          padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
+          padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
         ),
         child: buttonText,
       ),

@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(backgroundImage),
             fit: BoxFit.fitHeight,
@@ -22,9 +22,9 @@ class HomePage extends StatelessWidget {
             CustomElevatedButton(
               buttonText: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: EdgeInsets.only(left: 20.0),
                     child: Text(
                       "Ajoute un patient",
                       style: TextStyle(
@@ -46,9 +46,9 @@ class HomePage extends StatelessWidget {
             CustomElevatedButton(
               buttonText: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: EdgeInsets.only(left: 20.0),
                     child: Text(
                       "Voir mes patients",
                       style: TextStyle(
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                   MaterialPageRoute(
                     fullscreenDialog: true,
                     builder: (context) {
-                      return NewPatientScreen();
+                      return const NewPatientScreen();
                     },
                   ),
                 );

@@ -9,6 +9,7 @@ class NewPatientScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _NewPatientScreenState createState() => _NewPatientScreenState();
 }
 
@@ -60,7 +61,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
         return false;
       },
       child: PageView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: <Widget>[
           NewPatientForm(

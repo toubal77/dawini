@@ -27,8 +27,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
   Widget _buildFooter() {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Text(
             "Vous n'avez pas de compte ?",
             style: TextStyle(
@@ -50,7 +50,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
             //   ),
             // );
           },
-          child: Text(
+          child: const Text(
             'Créer un compte maintenant',
             style: TextStyle(
               fontSize: 15,
@@ -91,7 +91,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                     SizedBox(
                       width: 82.w,
                       height: 29.h,
-                      child: Text(
+                      child: const Text(
                         'Loging',
                         style: TextStyle(
                           color: Color(0xff181725),
@@ -107,7 +107,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                     SizedBox(
                       width: 233.w,
                       height: 30.h,
-                      child: Text(
+                      child: const Text(
                         'Entrez votre email et votre mot de passe',
                         style: TextStyle(
                           color: Color(0xff7C7C7C),
@@ -170,7 +170,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       child: Container(
                         alignment: Alignment.topRight,
                         height: 14.h,
-                        child: Text(
+                        child: const Text(
                           'Mot de passe oublié?',
                           style: TextStyle(
                             color: Color(0xff181725),
@@ -189,7 +189,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           );
                         }
                       },
-                      color: Color(0xff5383EC),
+                      color: const Color(0xff5383EC),
                       text: 'Suivant',
                     ),
                     const SizedBox(

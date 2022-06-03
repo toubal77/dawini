@@ -27,7 +27,7 @@ class ButtomMedia extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xffFCFCFC),
               fontWeight: FontWeight.w600,
               fontSize: 18,

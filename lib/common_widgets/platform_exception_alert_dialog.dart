@@ -1,11 +1,15 @@
 import 'package:dawini/common_widgets/platform_alert_dialog.dart';
 import 'package:flutter/services.dart';
+// ignore: implementation_imports
+import 'package:flutter/src/foundation/key.dart';
 
 class PlatformExceptionAlertDialog extends PlatformAlertDialog {
   PlatformExceptionAlertDialog({
+    Key? key,
     String title = 'Error',
     required Exception exception,
   }) : super(
+          key: key,
           title: title,
           content: _message(exception),
           defaultActionText: 'OK',

@@ -5,12 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PlatformAlertDialog extends PlatformWidget {
-  PlatformAlertDialog({
+  const PlatformAlertDialog({
+    Key? key,
     required this.title,
     required this.content,
     this.cancelActionText,
     this.defaultActionText = 'Ok',
-  });
+  }) : super(key: key);
 
   final String title;
   final String content;
@@ -67,7 +68,9 @@ class PlatformAlertDialog extends PlatformWidget {
 }
 
 class PlatformAlertDialogAction extends PlatformWidget {
-  PlatformAlertDialogAction({required this.child, required this.onPressed});
+  const PlatformAlertDialogAction(
+      {Key? key, required this.child, required this.onPressed})
+      : super(key: key);
   final Widget child;
   final VoidCallback onPressed;
 
