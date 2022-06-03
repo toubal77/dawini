@@ -39,7 +39,17 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) {
+                      return const NewPatientScreen();
+                    },
+                  ),
+                );
+              },
               minHeight: 35,
               minWidth: 200,
             ),
@@ -63,17 +73,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) {
-                      return const NewPatientScreen();
-                    },
-                  ),
-                );
-              },
+              onPressed: () {},
               minHeight: 35,
               minWidth: 200,
             ),
