@@ -1,5 +1,6 @@
 import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
+import 'package:dawini/common_widgets/date_picker.dart';
 import 'package:dawini/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   bool pswVisible = false;
   late String email = '';
   late String password = '';
-
+  late DateTime creationDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,13 +52,13 @@ class _NewPatientFormState extends State<NewPatientForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 200.w,
-                        height: 29.h,
+                        width: 220.w,
+                        height: 50.h,
                         child: const Text(
                           'Ajoute un nouveau patient',
                           style: TextStyle(
                             color: Color(0xff181725),
-                            fontSize: 26,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
@@ -159,6 +160,16 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           ),
                         ),
                       ),
+                      DatePicker(
+                        title: 'Date',
+                        hintText: 'DD/MM/YYYY',
+                        selectedDate: creationDate,
+                        onSelectedDate: (DateTime date) {
+                          setState(() {
+                            creationDate = date;
+                          });
+                        },
+                      ),
                       SizedBox(
                         child: CustomTextForm(
                           title: 'Age:',
@@ -186,6 +197,16 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           ),
                         ),
                       ),
+                      DatePicker(
+                        title: 'Date',
+                        hintText: 'DD/MM/YYYY',
+                        selectedDate: creationDate,
+                        onSelectedDate: (DateTime date) {
+                          setState(() {
+                            creationDate = date;
+                          });
+                        },
+                      ),
                       SizedBox(
                         child: CustomTextForm(
                           title: 'Age:',
@@ -212,6 +233,16 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
+                      ),
+                      DatePicker(
+                        title: 'Date',
+                        hintText: 'DD/MM/YYYY',
+                        selectedDate: creationDate,
+                        onSelectedDate: (DateTime date) {
+                          setState(() {
+                            creationDate = date;
+                          });
+                        },
                       ),
                       SizedBox(
                         child: CustomTextForm(
