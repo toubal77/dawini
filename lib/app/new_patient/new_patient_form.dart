@@ -1,3 +1,8 @@
+import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:dawini/app/new_patient/widgets/build_buttom_info.dart';
 import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/date_picker.dart';
@@ -5,8 +10,6 @@ import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/constants/app_colors.dart';
 import 'package:dawini/constants/strings.dart';
 import 'package:dawini/utils/validators.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewPatientForm extends StatefulWidget {
   const NewPatientForm({
@@ -71,9 +74,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      Container(
+                        margin: const EdgeInsets.only(top: 15),
                         width: 220.w,
-                        height: 50.h,
+                        height: 25.h,
                         child: const Text(
                           'Ajoute un nouveau patient',
                           style: TextStyle(
@@ -166,40 +170,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         ),
                       ),
                       if (antecedentsMedicaux.isNotEmpty)
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: antecedentsMedicaux.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        '- ${antecedentsMedicaux[index]}',
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          antecedentsMedicaux.removeWhere(
-                                              (element) =>
-                                                  element ==
-                                                  antecedentsMedicaux[index]);
-                                        });
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
+                        BuildListInfo(
+                          listInfo: antecedentsMedicaux,
+                        ),
                       SizedBox(
                         child: CustomTextForm(
                           title: '',
@@ -222,31 +195,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             antecedentsMedicauxString = '';
                           });
                         },
-                        child: Center(
-                          child: Container(
-                            width: 100,
-                            height: 30,
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: Colors.blue,
-                                width: 2,
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'ENVOYER',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: const BuildButtomInfo(),
                       ),
                       SizedBox(
                         width: 233.w,
@@ -261,41 +210,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         ),
                       ),
                       if (antecedentsChirurgicaux.isNotEmpty)
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: antecedentsChirurgicaux.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        '- ${antecedentsChirurgicaux[index]}',
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          antecedentsChirurgicaux.removeWhere(
-                                              (element) =>
-                                                  element ==
-                                                  antecedentsChirurgicaux[
-                                                      index]);
-                                        });
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
+                        BuildListInfo(
+                          listInfo: antecedentsChirurgicaux,
+                        ),
                       SizedBox(
                         child: CustomTextForm(
                           title: '',
@@ -319,31 +236,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             antecedentsChirurgicauxString = '';
                           });
                         },
-                        child: Center(
-                          child: Container(
-                            width: 100,
-                            height: 30,
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: Colors.blue,
-                                width: 2,
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'ENVOYER',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: const BuildButtomInfo(),
                       ),
                       SizedBox(
                         width: 233.w,
@@ -368,38 +261,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                       ),
                       if (signeFonctionnel.isNotEmpty)
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: signeFonctionnel.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                        child: Text(
-                                            '- ${signeFonctionnel[index]}')),
-                                    const SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          signeFonctionnel.removeWhere(
-                                              (element) =>
-                                                  element ==
-                                                  signeFonctionnel[index]);
-                                        });
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
+                        BuildListInfo(
+                          listInfo: signeFonctionnel,
+                        ),
                       SizedBox(
                         child: CustomTextForm(
                           title: '',
@@ -422,31 +286,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             signeFonctionnelString = '';
                           });
                         },
-                        child: Center(
-                          child: Container(
-                            width: 100,
-                            height: 30,
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: Colors.blue,
-                                width: 2,
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'ENVOYER',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: const BuildButtomInfo(),
                       ),
                       SizedBox(
                         width: 233.w,
@@ -471,38 +311,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                       ),
                       if (examenClinique.isNotEmpty)
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: examenClinique.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                        child:
-                                            Text('- ${examenClinique[index]}')),
-                                    const SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          examenClinique.removeWhere(
-                                              (element) =>
-                                                  element ==
-                                                  examenClinique[index]);
-                                        });
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
+                        BuildListInfo(
+                          listInfo: examenClinique,
+                        ),
                       SizedBox(
                         child: CustomTextForm(
                           title: '',
@@ -525,31 +336,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             examenCliniqueString = '';
                           });
                         },
-                        child: Center(
-                          child: Container(
-                            width: 100,
-                            height: 30,
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: Colors.blue,
-                                width: 2,
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'ENVOYER',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: const BuildButtomInfo(),
                       ),
                       SizedBox(
                         width: 233.w,
@@ -574,38 +361,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                       ),
                       if (examenBiologique.isNotEmpty)
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: examenBiologique.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                        child: Text(
-                                            '- ${examenBiologique[index]}')),
-                                    const SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          examenBiologique.removeWhere(
-                                              (element) =>
-                                                  element ==
-                                                  examenBiologique[index]);
-                                        });
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
+                        BuildListInfo(
+                          listInfo: examenBiologique,
+                        ),
                       SizedBox(
                         child: CustomTextForm(
                           title: '',
@@ -628,37 +386,14 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             examenBiologiqueString = '';
                           });
                         },
-                        child: Center(
-                          child: Container(
-                            width: 100,
-                            height: 30,
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: Colors.blue,
-                                width: 2,
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'ENVOYER',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: const BuildButtomInfo(),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
                       ButtomMedia(
                         press: () {
+                          FocusScope.of(context).requestFocus(FocusNode());
                           if (_formKey.currentState!.validate()) {
                             widget.onSaved(
                               nom: nom,
