@@ -105,7 +105,7 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 30.h,
                     child: const Text(
-                      'Dr Toubal M.H.M',
+                      'Toubal Zine-eddine',
                       style: TextStyle(
                         color: Color.fromARGB(255, 216, 91, 91),
                         fontSize: 16,
