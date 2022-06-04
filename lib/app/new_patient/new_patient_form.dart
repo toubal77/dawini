@@ -154,6 +154,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         onTap: () async {
                           setState(() {
                             if (antecedentsMedicauxString != '') {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               antecedentsMedicaux
                                   .add(antecedentsMedicauxString);
                               antecedentsMedicauxString = '';
@@ -183,6 +184,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         onTap: () async {
                           setState(() {
                             if (antecedentsChirurgicauxString != '') {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               antecedentsChirurgicaux
                                   .add(antecedentsChirurgicauxString);
                               antecedentsChirurgicauxString = '';
@@ -220,6 +222,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         onTap: () async {
                           setState(() {
                             if (signeFonctionnelString != '') {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               signeFonctionnel.add(signeFonctionnelString);
                               signeFonctionnelString = '';
                             }
@@ -256,6 +259,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         onTap: () async {
                           setState(() {
                             if (examenCliniqueString != '') {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               examenClinique.add(examenCliniqueString);
                               examenCliniqueString = '';
                             }
@@ -292,6 +296,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         onTap: () async {
                           setState(() {
                             if (examenBiologiqueString != '') {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               examenBiologique.add(examenBiologiqueString);
                               examenBiologiqueString = '';
                             }
