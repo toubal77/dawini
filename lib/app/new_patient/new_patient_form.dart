@@ -1,6 +1,7 @@
 import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/date_picker.dart';
+import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/constants/app_colors.dart';
 import 'package:dawini/constants/strings.dart';
 import 'package:dawini/utils/validators.dart';
@@ -32,14 +33,20 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late String nom = '';
   late String prenom = '';
   late int age;
+  late String antecedentsMedicauxString;
   late List<String> antecedentsMedicaux = [];
+  late String antecedentsChirurgicauxString;
   late List<String> antecedentsChirurgicaux = [];
+  late String signeFonctionnelString;
   late List<String> signeFonctionnel = [];
+  late String examenCliniqueString;
   late List<String> examenClinique = [];
+  late String examenBiologiqueString;
   late List<String> examenBiologique = [];
   late DateTime creationDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor,
@@ -88,7 +95,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             nom = value;
                           },
                           validator: (String? value) {
-                            if (value!.isNotEmpty) {
+                            if (value!.isEmpty) {
                               return invalidNameError;
                             }
                             // if (!Validators.isValidUsername(value)) {
@@ -109,7 +116,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             prenom = value;
                           },
                           validator: (String? value) {
-                            if (value!.isNotEmpty) {
+                            if (value!.isEmpty) {
                               return invalidPrenomError;
                             }
                             // if (!Validators.isValidprenom(value)) {
@@ -126,11 +133,12 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         child: CustomTextForm(
                           title: 'Age:',
                           textInputAction: TextInputAction.done,
+                          textInputType: TextInputType.number,
                           onChanged: (var value) {
-                            prenom = value;
+                            age = int.parse(value);
                           },
                           validator: (String? value) {
-                            if (value!.isNotEmpty) {
+                            if (value!.isEmpty) {
                               return invalidAgeError;
                             } else if (!Validators.isValidNumber(value)) {
                               return invalidAgeTypeError;
@@ -147,7 +155,102 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       ),
                       SizedBox(
                         width: 233.w,
-                        height: 30.h,
+                        height: 15.h,
+                        child: const Text(
+                          'Antécédents medicaux:',
+                          style: TextStyle(
+                            color: Color(0xff7C7C7C),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      if (antecedentsMedicaux.isNotEmpty)
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: antecedentsMedicaux.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        '- ${antecedentsMedicaux[index]}',
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          antecedentsMedicaux.removeWhere(
+                                              (element) =>
+                                                  element ==
+                                                  antecedentsMedicaux[index]);
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                      SizedBox(
+                        child: CustomTextForm(
+                          title: '',
+                          textInputAction: TextInputAction.done,
+                          onChanged: (var value) {
+                            antecedentsMedicauxString = value;
+                          },
+                          validator: (String? value) {
+                            // if (!Validators.isValidprenom(value)) {
+                            //   return invalidprenomError;
+                            // }
+                            return null;
+                          },
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            antecedentsMedicaux.add(antecedentsMedicauxString);
+                            antecedentsMedicauxString = '';
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 100,
+                            height: 30,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                              color: Colors.white,
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'ENVOYER',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 233.w,
+                        height: 15.h,
                         child: const Text(
                           'Antécédents chirurgicaux:',
                           style: TextStyle(
@@ -157,12 +260,48 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           ),
                         ),
                       ),
+                      if (antecedentsChirurgicaux.isNotEmpty)
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: antecedentsChirurgicaux.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        '- ${antecedentsChirurgicaux[index]}',
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          antecedentsChirurgicaux.removeWhere(
+                                              (element) =>
+                                                  element ==
+                                                  antecedentsChirurgicaux[
+                                                      index]);
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                       SizedBox(
                         child: CustomTextForm(
-                          title: 'Age:',
+                          title: '',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            prenom = value;
+                            antecedentsChirurgicauxString = value;
                           },
                           validator: (String? value) {
                             // if (!Validators.isValidprenom(value)) {
@@ -170,6 +309,40 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             // }
                             return null;
                           },
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            antecedentsChirurgicaux
+                                .add(antecedentsChirurgicauxString);
+                            antecedentsChirurgicauxString = '';
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 100,
+                            height: 30,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                              color: Colors.white,
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'ENVOYER',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -194,12 +367,45 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
+                      if (signeFonctionnel.isNotEmpty)
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: signeFonctionnel.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                        child: Text(
+                                            '- ${signeFonctionnel[index]}')),
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          signeFonctionnel.removeWhere(
+                                              (element) =>
+                                                  element ==
+                                                  signeFonctionnel[index]);
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                       SizedBox(
                         child: CustomTextForm(
-                          title: 'Age:',
+                          title: '',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            prenom = value;
+                            signeFonctionnelString = value;
                           },
                           validator: (String? value) {
                             // if (!Validators.isValidprenom(value)) {
@@ -207,6 +413,39 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             // }
                             return null;
                           },
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            signeFonctionnel.add(signeFonctionnelString);
+                            signeFonctionnelString = '';
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 100,
+                            height: 30,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                              color: Colors.white,
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'ENVOYER',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -231,12 +470,45 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
+                      if (examenClinique.isNotEmpty)
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: examenClinique.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                        child:
+                                            Text('- ${examenClinique[index]}')),
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          examenClinique.removeWhere(
+                                              (element) =>
+                                                  element ==
+                                                  examenClinique[index]);
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                       SizedBox(
                         child: CustomTextForm(
-                          title: 'Age:',
+                          title: '',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            prenom = value;
+                            examenCliniqueString = value;
                           },
                           validator: (String? value) {
                             // if (!Validators.isValidprenom(value)) {
@@ -244,6 +516,39 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             // }
                             return null;
                           },
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            examenClinique.add(examenCliniqueString);
+                            examenCliniqueString = '';
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 100,
+                            height: 30,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                              color: Colors.white,
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'ENVOYER',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -268,12 +573,45 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
+                      if (examenBiologique.isNotEmpty)
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: examenBiologique.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                        child: Text(
+                                            '- ${examenBiologique[index]}')),
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          examenBiologique.removeWhere(
+                                              (element) =>
+                                                  element ==
+                                                  examenBiologique[index]);
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                       SizedBox(
                         child: CustomTextForm(
-                          title: 'Age:',
+                          title: '',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            prenom = value;
+                            examenBiologiqueString = value;
                           },
                           validator: (String? value) {
                             // if (!Validators.isValidprenom(value)) {
@@ -281,6 +619,39 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             // }
                             return null;
                           },
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            examenBiologique.add(examenBiologiqueString);
+                            examenBiologiqueString = '';
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 100,
+                            height: 30,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                              color: Colors.white,
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'ENVOYER',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
