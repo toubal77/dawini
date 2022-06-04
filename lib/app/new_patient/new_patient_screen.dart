@@ -16,9 +16,14 @@ class NewPatientScreen extends StatefulWidget {
 class _NewPatientScreenState extends State<NewPatientScreen> {
   late final PageController _pageController;
 
-  late String passwords;
-  late String usernames;
-  late String adressUser;
+  late String nom = '';
+  late String prenom = '';
+  late int age;
+  late List<String> antecedentsMedicaux = [];
+  late List<String> antecedentsChirurgicaux = [];
+  late List<String> signeFonctionnel = [];
+  late List<String> examenClinique = [];
+  late List<String> examenBiologique = [];
 
   @override
   void initState() {
@@ -66,11 +71,23 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
         children: <Widget>[
           NewPatientForm(
             onSaved: ({
-              required String email,
-              required String password,
+              required String nom,
+              required String prenom,
+              required int age,
+              required List<String> antecedentsMedicaux,
+              required List<String> antecedentsChirurgicaux,
+              required List<String> signeFonctionnel,
+              required List<String> examenClinique,
+              required List<String> examenBiologique,
             }) {
-              usernames = email;
-              passwords = password;
+              nom = nom;
+              prenom = prenom;
+              age = age;
+              antecedentsMedicaux = antecedentsMedicaux;
+              antecedentsChirurgicaux = antecedentsChirurgicaux;
+              signeFonctionnel = signeFonctionnel;
+              examenClinique = examenClinique;
+              examenBiologique = examenBiologique;
               //    swipePage(1);
               sendInfo();
             },

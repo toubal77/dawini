@@ -11,8 +11,14 @@ class NewPatientForm extends StatefulWidget {
     required this.onSaved,
   }) : super(key: key);
   final void Function({
-    required String email,
-    required String password,
+    required String nom,
+    required String prenom,
+    required int age,
+    required List<String> antecedentsMedicaux,
+    required List<String> antecedentsChirurgicaux,
+    required List<String> signeFonctionnel,
+    required List<String> examenClinique,
+    required List<String> examenBiologique,
   }) onSaved;
 
   @override
@@ -21,9 +27,14 @@ class NewPatientForm extends StatefulWidget {
 
 class _NewPatientFormState extends State<NewPatientForm> {
   late final _formKey = GlobalKey<FormState>();
-  bool pswVisible = false;
-  late String email = '';
-  late String password = '';
+  late String nom = '';
+  late String prenom = '';
+  late int age;
+  late List<String> antecedentsMedicaux = [];
+  late List<String> antecedentsChirurgicaux = [];
+  late List<String> signeFonctionnel = [];
+  late List<String> examenClinique = [];
+  late List<String> examenBiologique = [];
   late DateTime creationDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -72,7 +83,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           title: 'Nom:',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            email = value;
+                            nom = value;
                           },
                           validator: (String? value) {
                             // if (!Validators.isValidUsername(value)) {
@@ -90,11 +101,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           title: 'Prenom:',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            password = value;
+                            prenom = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidPassword(value)) {
-                            //   return invalidPasswordError;
+                            // if (!Validators.isValidprenom(value)) {
+                            //   return invalidprenomError;
                             // }
                             return null;
                           },
@@ -108,11 +119,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           title: 'Age:',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            password = value;
+                            prenom = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidPassword(value)) {
-                            //   return invalidPasswordError;
+                            // if (!Validators.isValidprenom(value)) {
+                            //   return invalidprenomError;
                             // }
                             return null;
                           },
@@ -138,11 +149,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           title: 'Age:',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            password = value;
+                            prenom = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidPassword(value)) {
-                            //   return invalidPasswordError;
+                            // if (!Validators.isValidprenom(value)) {
+                            //   return invalidprenomError;
                             // }
                             return null;
                           },
@@ -175,11 +186,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           title: 'Age:',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            password = value;
+                            prenom = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidPassword(value)) {
-                            //   return invalidPasswordError;
+                            // if (!Validators.isValidprenom(value)) {
+                            //   return invalidprenomError;
                             // }
                             return null;
                           },
@@ -212,11 +223,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           title: 'Age:',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            password = value;
+                            prenom = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidPassword(value)) {
-                            //   return invalidPasswordError;
+                            // if (!Validators.isValidprenom(value)) {
+                            //   return invalidprenomError;
                             // }
                             return null;
                           },
@@ -249,11 +260,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           title: 'Age:',
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
-                            password = value;
+                            prenom = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidPassword(value)) {
-                            //   return invalidPasswordError;
+                            // if (!Validators.isValidprenom(value)) {
+                            //   return invalidprenomError;
                             // }
                             return null;
                           },
@@ -266,8 +277,14 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         press: () {
                           if (_formKey.currentState!.validate()) {
                             widget.onSaved(
-                              email: email,
-                              password: password,
+                              nom: nom,
+                              prenom: prenom,
+                              age: age,
+                              antecedentsMedicaux: antecedentsMedicaux,
+                              antecedentsChirurgicaux: antecedentsChirurgicaux,
+                              signeFonctionnel: signeFonctionnel,
+                              examenClinique: examenClinique,
+                              examenBiologique: examenBiologique,
                             );
                           }
                         },
