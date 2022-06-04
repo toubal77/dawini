@@ -40,6 +40,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late int age;
   late String antecedentsMedicauxString;
   late List<String> antecedentsMedicaux = [];
+  late Map<String, List<String>> antecedentsMedicauxList =
+      antecedentsMedicauxMap;
   late String antecedentsChirurgicauxString;
   late List<String> antecedentsChirurgicaux = [];
   late String signeFonctionnelString;
