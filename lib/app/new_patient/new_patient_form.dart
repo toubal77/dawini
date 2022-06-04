@@ -40,6 +40,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late int age;
   late String antecedentsMedicauxString;
   late List<String> antecedentsMedicaux = [];
+  late List<String> antecedentsMedicauxListNameKey =
+      antecedentsMedicauxListName;
   late Map<String, List<String>> antecedentsMedicauxList =
       antecedentsMedicauxMap;
   late String antecedentsChirurgicauxString;
@@ -152,18 +154,54 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           },
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () async {
-                          setState(() {
-                            if (antecedentsMedicauxString != '') {
-                              FocusScope.of(context).requestFocus(FocusNode());
-                              antecedentsMedicaux
-                                  .add(antecedentsMedicauxString);
-                              antecedentsMedicauxString = '';
-                            }
-                          });
-                        },
-                        child: const BuildButtomInfo(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title:
+                                          const Text('Antécédents medicaux:'),
+                                      content: SizedBox(
+                                        width: double.maxFinite,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              antecedentsMedicauxListNameKey
+                                                  .length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return ListTile(
+                                              title: Text(
+                                                  antecedentsMedicauxListNameKey[
+                                                      index]),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: const BuildButtomInfo(title: 'CHOISIR'),
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              setState(() {
+                                if (antecedentsMedicauxString != '') {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  antecedentsMedicaux
+                                      .add(antecedentsMedicauxString);
+                                  antecedentsMedicauxString = '';
+                                }
+                              });
+                            },
+                            child: const BuildButtomInfo(title: 'ENVOYER'),
+                          ),
+                        ],
                       ),
                       const BuildTitleInfo(text: 'Antécédents chirurgicaux:'),
                       if (antecedentsChirurgicaux.isNotEmpty)
@@ -193,7 +231,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             }
                           });
                         },
-                        child: const BuildButtomInfo(),
+                        child: const BuildButtomInfo(title: 'ENVOYER'),
                       ),
                       const BuildTitleInfo(text: 'Signe fonctionnel:'),
                       BuildDateInfo(
@@ -230,7 +268,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             }
                           });
                         },
-                        child: const BuildButtomInfo(),
+                        child: const BuildButtomInfo(title: 'ENVOYER'),
                       ),
                       const BuildTitleInfo(text: 'Examen clinique:'),
                       BuildDateInfo(
@@ -267,7 +305,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             }
                           });
                         },
-                        child: const BuildButtomInfo(),
+                        child: const BuildButtomInfo(title: 'ENVOYER'),
                       ),
                       const BuildTitleInfo(text: 'Examen biologique:'),
                       BuildDateInfo(
@@ -304,7 +342,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             }
                           });
                         },
-                        child: const BuildButtomInfo(),
+                        child: const BuildButtomInfo(title: 'ENVOYER'),
                       ),
                       const SizedBox(
                         height: 20,

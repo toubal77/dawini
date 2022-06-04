@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class BuildButtomInfo extends StatelessWidget {
+  final String title;
   const BuildButtomInfo({
     Key? key,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -20,10 +22,10 @@ class BuildButtomInfo extends StatelessWidget {
           ),
           color: Colors.white,
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            'ENVOYER',
-            style: TextStyle(
+            title,
+            style: const TextStyle(
               color: Colors.blue,
               fontSize: 16,
               fontWeight: FontWeight.w600,

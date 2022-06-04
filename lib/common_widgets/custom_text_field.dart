@@ -18,6 +18,7 @@ class CustomTextForm extends StatelessWidget {
     this.textInputAction,
     this.textInputType = TextInputType.text,
     this.lines,
+    this.readOnly = false,
     this.fillColor = Colors.white,
   }) : super(key: key);
 
@@ -35,6 +36,7 @@ class CustomTextForm extends StatelessWidget {
   final Widget? prefix;
   final TextInputAction? textInputAction;
   final int? lines;
+  final bool readOnly;
   final Color fillColor;
 
   @override
@@ -70,6 +72,7 @@ class CustomTextForm extends StatelessWidget {
               initialValue: initialValue,
               keyboardType: isPhoneNumber ? TextInputType.phone : textInputType,
               maxLength: maxLength,
+              readOnly: readOnly,
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),

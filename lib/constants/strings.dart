@@ -12,6 +12,18 @@ const String invalidEmailError = '';
 const String invalidClubActivitiesError = '';
 const String internetError =
     'pas de connexion Internet, assurez-vous que le wifi ou les données mobiles sont activés et réessayez';
+const List<String> antecedentsMedicauxListName = [
+  'Maladies cardiovasculaires',
+  'Cancers',
+  'Maladies endocriniennes et ORL',
+  'Maladies digestives',
+  'Maladies rhumatologiques',
+  'Maladies neurilogiques et musculaires',
+  'Maladies gynécologiques, urinaires ou rénales',
+  'Maladies de la peau',
+  'Maladies des yeux',
+  'Maladies hématologiques'
+];
 const Map<String, List<String>> antecedentsMedicauxMap = {
   'Maladies cardiovasculaires': [
     'hypertension artérielle',
