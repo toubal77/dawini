@@ -153,8 +153,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       GestureDetector(
                         onTap: () async {
                           setState(() {
-                            antecedentsMedicaux.add(antecedentsMedicauxString);
-                            antecedentsMedicauxString = '';
+                            if (antecedentsMedicauxString != '') {
+                              antecedentsMedicaux
+                                  .add(antecedentsMedicauxString);
+                              antecedentsMedicauxString = '';
+                            }
                           });
                         },
                         child: const BuildButtomInfo(),
@@ -179,9 +182,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       GestureDetector(
                         onTap: () async {
                           setState(() {
-                            antecedentsChirurgicaux
-                                .add(antecedentsChirurgicauxString);
-                            antecedentsChirurgicauxString = '';
+                            if (antecedentsChirurgicauxString != '') {
+                              antecedentsChirurgicaux
+                                  .add(antecedentsChirurgicauxString);
+                              antecedentsChirurgicauxString = '';
+                            }
                           });
                         },
                         child: const BuildButtomInfo(),
@@ -214,8 +219,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       GestureDetector(
                         onTap: () async {
                           setState(() {
-                            signeFonctionnel.add(signeFonctionnelString);
-                            signeFonctionnelString = '';
+                            if (signeFonctionnelString != '') {
+                              signeFonctionnel.add(signeFonctionnelString);
+                              signeFonctionnelString = '';
+                            }
                           });
                         },
                         child: const BuildButtomInfo(),
@@ -248,8 +255,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       GestureDetector(
                         onTap: () async {
                           setState(() {
-                            examenClinique.add(examenCliniqueString);
-                            examenCliniqueString = '';
+                            if (examenCliniqueString != '') {
+                              examenClinique.add(examenCliniqueString);
+                              examenCliniqueString = '';
+                            }
                           });
                         },
                         child: const BuildButtomInfo(),
@@ -282,8 +291,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       GestureDetector(
                         onTap: () async {
                           setState(() {
-                            examenBiologique.add(examenBiologiqueString);
-                            examenBiologiqueString = '';
+                            if (examenBiologiqueString != '') {
+                              examenBiologique.add(examenBiologiqueString);
+                              examenBiologiqueString = '';
+                            }
                           });
                         },
                         child: const BuildButtomInfo(),
