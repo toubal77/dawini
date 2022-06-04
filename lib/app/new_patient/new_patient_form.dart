@@ -1,4 +1,5 @@
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
+import 'package:dawini/app/new_patient/widgets/build_title_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -57,15 +58,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Container(
-              //   width: 130.w,
-              //   height: 130.h,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image: AssetImage(whiteLogo),
-              //     ),
-              //   ),
-              // ),
               Container(
                 width: MediaQuery.of(context).size.width.w,
                 margin: const EdgeInsets.only(left: 24.95, right: 24.95),
@@ -102,9 +94,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             if (value!.isEmpty) {
                               return invalidNameError;
                             }
-                            // if (!Validators.isValidUsername(value)) {
-                            //   return invalidUsernameSignInError;
-                            // }
+
                             return null;
                           },
                         ),
@@ -123,9 +113,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             if (value!.isEmpty) {
                               return invalidPrenomError;
                             }
-                            // if (!Validators.isValidprenom(value)) {
-                            //   return invalidprenomError;
-                            // }
+
                             return null;
                           },
                         ),
@@ -147,9 +135,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             } else if (!Validators.isValidNumber(value)) {
                               return invalidAgeTypeError;
                             }
-                            // if (!Validators.isValidprenom(value)) {
-                            //   return invalidprenomError;
-                            // }
+
                             return null;
                           },
                         ),
@@ -157,18 +143,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       const SizedBox(
                         height: 15,
                       ),
-                      SizedBox(
-                        width: 233.w,
-                        height: 15.h,
-                        child: const Text(
-                          'Antécédents medicaux:',
-                          style: TextStyle(
-                            color: Color(0xff7C7C7C),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      const BuildTitleInfo(text: 'Antécédents medicaux:'),
                       if (antecedentsMedicaux.isNotEmpty)
                         BuildListInfo(
                           listInfo: antecedentsMedicaux,
@@ -181,9 +156,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             antecedentsMedicauxString = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidprenom(value)) {
-                            //   return invalidprenomError;
-                            // }
                             return null;
                           },
                         ),
@@ -197,18 +169,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                         child: const BuildButtomInfo(),
                       ),
-                      SizedBox(
-                        width: 233.w,
-                        height: 15.h,
-                        child: const Text(
-                          'Antécédents chirurgicaux:',
-                          style: TextStyle(
-                            color: Color(0xff7C7C7C),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      const BuildTitleInfo(text: 'Antécédents chirurgicaux:'),
                       if (antecedentsChirurgicaux.isNotEmpty)
                         BuildListInfo(
                           listInfo: antecedentsChirurgicaux,
@@ -221,9 +182,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             antecedentsChirurgicauxString = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidprenom(value)) {
-                            //   return invalidprenomError;
-                            // }
                             return null;
                           },
                         ),
@@ -238,18 +196,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                         child: const BuildButtomInfo(),
                       ),
-                      SizedBox(
-                        width: 233.w,
-                        height: 30.h,
-                        child: const Text(
-                          'Signe fonctionnel:',
-                          style: TextStyle(
-                            color: Color(0xff7C7C7C),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      const BuildTitleInfo(text: 'Signe fonctionnel:'),
                       DatePicker(
                         title: 'Date',
                         hintText: 'DD/MM/YYYY',
@@ -272,9 +219,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             signeFonctionnelString = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidprenom(value)) {
-                            //   return invalidprenomError;
-                            // }
                             return null;
                           },
                         ),
@@ -288,18 +232,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                         child: const BuildButtomInfo(),
                       ),
-                      SizedBox(
-                        width: 233.w,
-                        height: 30.h,
-                        child: const Text(
-                          'Examen clinique:',
-                          style: TextStyle(
-                            color: Color(0xff7C7C7C),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      const BuildTitleInfo(text: 'Examen clinique:'),
                       DatePicker(
                         title: 'Date',
                         hintText: 'DD/MM/YYYY',
@@ -322,9 +255,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             examenCliniqueString = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidprenom(value)) {
-                            //   return invalidprenomError;
-                            // }
                             return null;
                           },
                         ),
@@ -338,18 +268,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                         child: const BuildButtomInfo(),
                       ),
-                      SizedBox(
-                        width: 233.w,
-                        height: 30.h,
-                        child: const Text(
-                          'Examen biologique:',
-                          style: TextStyle(
-                            color: Color(0xff7C7C7C),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      const BuildTitleInfo(text: 'Examen biologique:'),
                       DatePicker(
                         title: 'Date',
                         hintText: 'DD/MM/YYYY',
@@ -372,9 +291,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             examenBiologiqueString = value;
                           },
                           validator: (String? value) {
-                            // if (!Validators.isValidprenom(value)) {
-                            //   return invalidprenomError;
-                            // }
                             return null;
                           },
                         ),
