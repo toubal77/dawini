@@ -1,4 +1,6 @@
+import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
+import 'package:dawini/app/new_patient/widgets/build_title.dart';
 import 'package:dawini/app/new_patient/widgets/build_title_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dawini/app/new_patient/widgets/build_buttom_info.dart';
 import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
-import 'package:dawini/common_widgets/date_picker.dart';
 import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/constants/app_colors.dart';
 import 'package:dawini/constants/strings.dart';
@@ -47,7 +48,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late List<String> examenClinique = [];
   late String examenBiologiqueString;
   late List<String> examenBiologique = [];
-  late DateTime creationDate = DateTime.now();
+  late DateTime signeFonctionnelDate = DateTime.now();
+  late DateTime examenCliniqueDate = DateTime.now();
+  late DateTime examenBiologiqueDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -66,20 +69,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 15),
-                        width: 220.w,
-                        height: 25.h,
-                        child: const Text(
-                          'Ajoute un nouveau patient',
-                          style: TextStyle(
-                            color: Color(0xff181725),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
+                      const BuildTitle(),
                       const SizedBox(
                         height: 15,
                       ),
@@ -197,13 +187,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         child: const BuildButtomInfo(),
                       ),
                       const BuildTitleInfo(text: 'Signe fonctionnel:'),
-                      DatePicker(
-                        title: 'Date',
-                        hintText: 'DD/MM/YYYY',
-                        selectedDate: creationDate,
-                        onSelectedDate: (DateTime date) {
+                      BuildDateInfo(
+                        date: signeFonctionnelDate,
+                        fct: (DateTime date) {
                           setState(() {
-                            creationDate = date;
+                            signeFonctionnelDate = date;
                           });
                         },
                       ),
@@ -233,13 +221,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         child: const BuildButtomInfo(),
                       ),
                       const BuildTitleInfo(text: 'Examen clinique:'),
-                      DatePicker(
-                        title: 'Date',
-                        hintText: 'DD/MM/YYYY',
-                        selectedDate: creationDate,
-                        onSelectedDate: (DateTime date) {
+                      BuildDateInfo(
+                        date: examenCliniqueDate,
+                        fct: (DateTime date) {
                           setState(() {
-                            creationDate = date;
+                            examenCliniqueDate = date;
                           });
                         },
                       ),
@@ -269,13 +255,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         child: const BuildButtomInfo(),
                       ),
                       const BuildTitleInfo(text: 'Examen biologique:'),
-                      DatePicker(
-                        title: 'Date',
-                        hintText: 'DD/MM/YYYY',
-                        selectedDate: creationDate,
-                        onSelectedDate: (DateTime date) {
+                      BuildDateInfo(
+                        date: examenBiologiqueDate,
+                        fct: (DateTime date) {
                           setState(() {
-                            creationDate = date;
+                            examenBiologiqueDate = date;
                           });
                         },
                       ),
