@@ -2,6 +2,8 @@ import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/date_picker.dart';
 import 'package:dawini/constants/app_colors.dart';
+import 'package:dawini/constants/strings.dart';
+import 'package:dawini/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -86,6 +88,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             nom = value;
                           },
                           validator: (String? value) {
+                            if (value!.isNotEmpty) {
+                              return invalidNameError;
+                            }
                             // if (!Validators.isValidUsername(value)) {
                             //   return invalidUsernameSignInError;
                             // }
@@ -104,6 +109,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             prenom = value;
                           },
                           validator: (String? value) {
+                            if (value!.isNotEmpty) {
+                              return invalidPrenomError;
+                            }
                             // if (!Validators.isValidprenom(value)) {
                             //   return invalidprenomError;
                             // }
@@ -122,6 +130,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             prenom = value;
                           },
                           validator: (String? value) {
+                            if (value!.isNotEmpty) {
+                              return invalidAgeError;
+                            } else if (!Validators.isValidNumber(value)) {
+                              return invalidAgeTypeError;
+                            }
                             // if (!Validators.isValidprenom(value)) {
                             //   return invalidprenomError;
                             // }
