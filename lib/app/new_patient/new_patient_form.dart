@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_title.dart';
@@ -55,6 +57,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late DateTime signeFonctionnelDate = DateTime.now();
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
+  var _expanded = false;
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -160,30 +163,126 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           GestureDetector(
                             onTap: () {
                               showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title:
-                                          const Text('Antécédents medicaux:'),
-                                      content: SizedBox(
-                                        width: double.maxFinite,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount:
-                                              antecedentsMedicauxListNameKey
-                                                  .length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return ListTile(
-                                              title: Text(
-                                                  antecedentsMedicauxListNameKey[
-                                                      index]),
-                                            );
-                                          },
-                                        ),
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    scrollable: true,
+                                    title: const Text('Antécédents medicaux:'),
+                                    content: AnimatedContainer(
+                                      // height: double.maxFinite,
+                                      width: double.maxFinite,
+                                      height: double.maxFinite,
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            width: double.maxFinite,
+                                            child: ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    antecedentsMedicauxListNameKey
+                                                        .length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  final String
+                                                      antecedentsMedicauxName =
+                                                      antecedentsMedicauxListNameKey[
+                                                          index];
+                                                  return Column(
+                                                    children: [
+                                                      ListTile(
+                                                        title: Text(
+                                                            antecedentsMedicauxName),
+                                                        trailing: IconButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              _expanded =
+                                                                  !_expanded;
+                                                            });
+                                                          },
+                                                          icon: Icon(_expanded
+                                                              ? Icons
+                                                                  .expand_less
+                                                              : Icons
+                                                                  .expand_more),
+                                                        ),
+                                                      ),
+                                                      AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal: 15,
+                                                                vertical: 4),
+                                                        height: _expanded
+                                                            ? antecedentsMedicauxList[
+                                                                            antecedentsMedicauxName]!
+                                                                        .length !=
+                                                                    1
+                                                                ? min(
+                                                                    antecedentsMedicauxList[antecedentsMedicauxName]!.length *
+                                                                            70.0 +
+                                                                        180,
+                                                                    118)
+                                                                : min(
+                                                                    antecedentsMedicauxList[antecedentsMedicauxName]!.length *
+                                                                            20.0 +
+                                                                        120,
+                                                                    85)
+                                                            : 0,
+                                                        child: ListView.builder(
+                                                          itemCount:
+                                                              antecedentsMedicauxList[
+                                                                      antecedentsMedicauxName]!
+                                                                  .length,
+                                                          itemBuilder:
+                                                              (_, index) {
+                                                            final String
+                                                                antecedentsMedicauxListName =
+                                                                antecedentsMedicauxList[
+                                                                        antecedentsMedicauxName]![
+                                                                    index];
+                                                            return Column(
+                                                              children: [
+                                                                Container(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.60,
+                                                                  child: Text(
+                                                                    antecedentsMedicauxListName,
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      fontSize:
+                                                                          18,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Divider(),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                }),
+                                          ),
+                                        ],
                                       ),
-                                    );
-                                  });
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             child: const BuildButtomInfo(title: 'CHOISIR'),
                           ),
