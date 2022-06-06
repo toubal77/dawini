@@ -4,6 +4,7 @@ import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_title.dart';
 import 'package:dawini/app/new_patient/widgets/build_title_info.dart';
+import 'package:dawini/common_widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -57,6 +58,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late DateTime signeFonctionnelDate = DateTime.now();
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
+  late DateTime imagerieDate = DateTime.now();
+  late String typeImagerie;
   var _expanded = false;
   @override
   Widget build(BuildContext context) {
@@ -162,143 +165,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    scrollable: true,
-                                    title: const Text('Antécédents medicaux:'),
-                                    content: AnimatedContainer(
-                                      // height: double.maxFinite,
-                                      width: double.maxFinite,
-                                      height: double.maxFinite,
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            width: double.maxFinite,
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              itemCount:
-                                                  antecedentsMedicauxListNameKey
-                                                      .length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                final String
-                                                    antecedentsMedicauxName =
-                                                    antecedentsMedicauxListNameKey[
-                                                        index];
-                                                return Column(
-                                                  children: [
-                                                    ListTile(
-                                                      title: Text(
-                                                          antecedentsMedicauxName),
-                                                      trailing: IconButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            _expanded =
-                                                                !_expanded;
-                                                          });
-                                                        },
-                                                        icon: Icon(_expanded
-                                                            ? Icons.expand_less
-                                                            : Icons
-                                                                .expand_more),
-                                                      ),
-                                                    ),
-                                                    AnimatedContainer(
-                                                      duration: const Duration(
-                                                          milliseconds: 300),
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 15,
-                                                          vertical: 4),
-                                                      height: _expanded
-                                                          ? antecedentsMedicauxList[
-                                                                          antecedentsMedicauxName]!
-                                                                      .length !=
-                                                                  1
-                                                              ? min(
-                                                                  antecedentsMedicauxList[antecedentsMedicauxName]!
-                                                                              .length *
-                                                                          70.0 +
-                                                                      180,
-                                                                  118)
-                                                              : min(
-                                                                  antecedentsMedicauxList[antecedentsMedicauxName]!
-                                                                              .length *
-                                                                          20.0 +
-                                                                      120,
-                                                                  85)
-                                                          : 0,
-                                                      child: ListView.builder(
-                                                        itemCount:
-                                                            antecedentsMedicauxList[
-                                                                    antecedentsMedicauxName]!
-                                                                .length,
-                                                        itemBuilder:
-                                                            (_, index) {
-                                                          final String
-                                                              antecedentsMedicauxListName =
-                                                              antecedentsMedicauxList[
-                                                                      antecedentsMedicauxName]![
-                                                                  index];
-                                                          return Column(
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    if (!antecedentsMedicaux
-                                                                        .contains(
-                                                                            antecedentsMedicauxListName)) {
-                                                                      FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(
-                                                                              FocusNode());
-                                                                      antecedentsMedicaux
-                                                                          .add(
-                                                                              antecedentsMedicauxListName);
-                                                                    }
-                                                                  });
-                                                                },
-                                                                child: SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.60,
-                                                                  child: Text(
-                                                                    antecedentsMedicauxListName,
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              const Divider(),
-                                                            ],
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
+                              showAM(context);
                             },
                             child: const BuildButtomInfo(title: 'CHOISIR'),
                           ),
@@ -460,6 +327,32 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         },
                         child: const BuildButtomInfo(title: 'ENVOYER'),
                       ),
+                      const BuildTitleInfo(text: 'Imagerie:'),
+                      CustomDropDown(
+                        fillColor: Colors.white70,
+                        title: 'Type',
+                        hint: 'Type d\'imagerie',
+                        validator: (String? value) {
+                          if (value == null) {
+                            return invalidTypeImagerieError;
+                          }
+                          return null;
+                        },
+                        onChanged: (String? value) {
+                          if (value == null) {
+                          } else {
+                            typeImagerie = value;
+                          }
+                        },
+                      ),
+                      BuildDateInfo(
+                        date: imagerieDate,
+                        fct: (DateTime date) {
+                          setState(() {
+                            imagerieDate = date;
+                          });
+                        },
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -493,6 +386,121 @@ class _NewPatientFormState extends State<NewPatientForm> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> showAM(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          scrollable: true,
+          title: const Text('Antécédents medicaux:'),
+          content: AnimatedContainer(
+            // height: double.maxFinite,
+            width: double.maxFinite,
+            height: double.maxFinite,
+            duration: const Duration(milliseconds: 300),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.maxFinite,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: antecedentsMedicauxListNameKey.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final String antecedentsMedicauxName =
+                          antecedentsMedicauxListNameKey[index];
+                      return Column(
+                        children: [
+                          ListTile(
+                            title: Text(antecedentsMedicauxName),
+                            trailing: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _expanded = !_expanded;
+                                });
+                              },
+                              icon: Icon(_expanded
+                                  ? Icons.expand_less
+                                  : Icons.expand_more),
+                            ),
+                          ),
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 4),
+                            height: _expanded
+                                ? antecedentsMedicauxList[
+                                                antecedentsMedicauxName]!
+                                            .length !=
+                                        1
+                                    ? min(
+                                        antecedentsMedicauxList[
+                                                        antecedentsMedicauxName]!
+                                                    .length *
+                                                70.0 +
+                                            180,
+                                        118)
+                                    : min(
+                                        antecedentsMedicauxList[
+                                                        antecedentsMedicauxName]!
+                                                    .length *
+                                                20.0 +
+                                            120,
+                                        85)
+                                : 0,
+                            child: ListView.builder(
+                              itemCount: antecedentsMedicauxList[
+                                      antecedentsMedicauxName]!
+                                  .length,
+                              itemBuilder: (_, index) {
+                                final String antecedentsMedicauxListName =
+                                    antecedentsMedicauxList[
+                                        antecedentsMedicauxName]![index];
+                                return Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (!antecedentsMedicaux.contains(
+                                              antecedentsMedicauxListName)) {
+                                            FocusScope.of(context)
+                                                .requestFocus(FocusNode());
+                                            antecedentsMedicaux.add(
+                                                antecedentsMedicauxListName);
+                                          }
+                                        });
+                                      },
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.60,
+                                        child: Text(
+                                          antecedentsMedicauxListName,
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const Divider(),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
