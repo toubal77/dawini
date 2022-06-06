@@ -59,6 +59,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
+  late List<String> imagerie = [];
+  late String imagerieString;
   late String typeImagerie;
   var _expanded = false;
   @override
@@ -333,9 +335,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         title: 'Type',
                         hint: 'Type d\'imagerie',
                         validator: (String? value) {
-                          if (value == null) {
-                            return invalidTypeImagerieError;
-                          }
                           return null;
                         },
                         onChanged: (String? value) {
@@ -352,6 +351,46 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             imagerieDate = date;
                           });
                         },
+                      ),
+                      if (imagerie.isNotEmpty)
+                        BuildListInfo(
+                          listInfo: imagerie,
+                        ),
+                      SizedBox(
+                        child: CustomTextForm(
+                          title: '',
+                          textInputAction: TextInputAction.done,
+                          onChanged: (var value) {
+                            imagerieString = value;
+                          },
+                          validator: (String? value) {
+                            return null;
+                          },
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              // showAM(context);
+                            },
+                            child: const BuildButtomInfo(title: 'IMAGE'),
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              setState(() {
+                                if (imagerieString != '') {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  imagerie.add(imagerieString);
+                                  imagerieString = '';
+                                }
+                              });
+                            },
+                            child: const BuildButtomInfo(title: 'ENVOYER'),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 20,
