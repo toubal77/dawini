@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dawini/app/new_patient/image_to_text.dart';
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_title.dart';
@@ -373,7 +374,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // showAM(context);
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const ImageToText();
+                              }));
                             },
                             child: const BuildButtomInfo(title: 'IMAGE'),
                           ),

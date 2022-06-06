@@ -37,6 +37,11 @@ dependencies:
   flutter_screenutil: ^5.0.1+2
   intl: ^0.17.0
   bordered_text: ^2.0.0
+  cached_network_image: ^3.2.1
+  image_picker: ^0.8.5+3
+  uuid: ^3.0.6
+  provider: ^6.0.3
+  sn_progress_dialog: ^1.0.8
 
 dev_dependencies:
   flutter_test:
