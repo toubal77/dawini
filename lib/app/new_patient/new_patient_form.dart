@@ -179,77 +179,91 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                           SizedBox(
                                             width: double.maxFinite,
                                             child: ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    antecedentsMedicauxListNameKey
-                                                        .length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  final String
-                                                      antecedentsMedicauxName =
-                                                      antecedentsMedicauxListNameKey[
-                                                          index];
-                                                  return Column(
-                                                    children: [
-                                                      ListTile(
-                                                        title: Text(
-                                                            antecedentsMedicauxName),
-                                                        trailing: IconButton(
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              _expanded =
-                                                                  !_expanded;
-                                                            });
-                                                          },
-                                                          icon: Icon(_expanded
-                                                              ? Icons
-                                                                  .expand_less
-                                                              : Icons
-                                                                  .expand_more),
-                                                        ),
+                                              shrinkWrap: true,
+                                              itemCount:
+                                                  antecedentsMedicauxListNameKey
+                                                      .length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                final String
+                                                    antecedentsMedicauxName =
+                                                    antecedentsMedicauxListNameKey[
+                                                        index];
+                                                return Column(
+                                                  children: [
+                                                    ListTile(
+                                                      title: Text(
+                                                          antecedentsMedicauxName),
+                                                      trailing: IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            _expanded =
+                                                                !_expanded;
+                                                          });
+                                                        },
+                                                        icon: Icon(_expanded
+                                                            ? Icons.expand_less
+                                                            : Icons
+                                                                .expand_more),
                                                       ),
-                                                      AnimatedContainer(
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    300),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal: 15,
-                                                                vertical: 4),
-                                                        height: _expanded
-                                                            ? antecedentsMedicauxList[
-                                                                            antecedentsMedicauxName]!
-                                                                        .length !=
-                                                                    1
-                                                                ? min(
-                                                                    antecedentsMedicauxList[antecedentsMedicauxName]!.length *
-                                                                            70.0 +
-                                                                        180,
-                                                                    118)
-                                                                : min(
-                                                                    antecedentsMedicauxList[antecedentsMedicauxName]!.length *
-                                                                            20.0 +
-                                                                        120,
-                                                                    85)
-                                                            : 0,
-                                                        child: ListView.builder(
-                                                          itemCount:
+                                                    ),
+                                                    AnimatedContainer(
+                                                      duration: const Duration(
+                                                          milliseconds: 300),
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 4),
+                                                      height: _expanded
+                                                          ? antecedentsMedicauxList[
+                                                                          antecedentsMedicauxName]!
+                                                                      .length !=
+                                                                  1
+                                                              ? min(
+                                                                  antecedentsMedicauxList[antecedentsMedicauxName]!
+                                                                              .length *
+                                                                          70.0 +
+                                                                      180,
+                                                                  118)
+                                                              : min(
+                                                                  antecedentsMedicauxList[antecedentsMedicauxName]!
+                                                                              .length *
+                                                                          20.0 +
+                                                                      120,
+                                                                  85)
+                                                          : 0,
+                                                      child: ListView.builder(
+                                                        itemCount:
+                                                            antecedentsMedicauxList[
+                                                                    antecedentsMedicauxName]!
+                                                                .length,
+                                                        itemBuilder:
+                                                            (_, index) {
+                                                          final String
+                                                              antecedentsMedicauxListName =
                                                               antecedentsMedicauxList[
-                                                                      antecedentsMedicauxName]!
-                                                                  .length,
-                                                          itemBuilder:
-                                                              (_, index) {
-                                                            final String
-                                                                antecedentsMedicauxListName =
-                                                                antecedentsMedicauxList[
-                                                                        antecedentsMedicauxName]![
-                                                                    index];
-                                                            return Column(
-                                                              children: [
-                                                                Container(
+                                                                      antecedentsMedicauxName]![
+                                                                  index];
+                                                          return Column(
+                                                            children: [
+                                                              GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    if (!antecedentsMedicaux
+                                                                        .contains(
+                                                                            antecedentsMedicauxListName)) {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(
+                                                                              FocusNode());
+                                                                      antecedentsMedicaux
+                                                                          .add(
+                                                                              antecedentsMedicauxListName);
+                                                                    }
+                                                                  });
+                                                                },
+                                                                child: SizedBox(
                                                                   width: MediaQuery.of(
                                                                               context)
                                                                           .size
@@ -267,15 +281,17 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Divider(),
-                                                              ],
-                                                            );
-                                                          },
-                                                        ),
+                                                              ),
+                                                              const Divider(),
+                                                            ],
+                                                          );
+                                                        },
                                                       ),
-                                                    ],
-                                                  );
-                                                }),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -289,7 +305,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           GestureDetector(
                             onTap: () async {
                               setState(() {
-                                if (antecedentsMedicauxString != '') {
+                                if (!antecedentsMedicaux
+                                    .contains(antecedentsMedicauxString)) {
                                   FocusScope.of(context)
                                       .requestFocus(FocusNode());
                                   antecedentsMedicaux
