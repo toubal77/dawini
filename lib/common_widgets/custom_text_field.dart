@@ -15,6 +15,7 @@ class CustomTextForm extends StatelessWidget {
     this.initialValue,
     this.isPassword = false,
     this.prefix,
+    this.suffix,
     this.textInputAction,
     this.textInputType = TextInputType.text,
     this.lines,
@@ -34,6 +35,7 @@ class CustomTextForm extends StatelessWidget {
   final bool isEnabled;
   final FormFieldValidator<String> validator;
   final Widget? prefix;
+  final Widget? suffix;
   final TextInputAction? textInputAction;
   final int? lines;
   final bool readOnly;
@@ -77,6 +79,7 @@ class CustomTextForm extends StatelessWidget {
                 isDense: true,
                 contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
                 prefixIcon: prefix,
+                suffixIcon: suffix,
                 hintText: hintText,
                 fillColor: fillColor,
                 filled: true,
