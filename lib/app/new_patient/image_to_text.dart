@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:dawini/constants/app_colors.dart';
@@ -19,8 +17,6 @@ class ImageToText extends StatefulWidget {
 }
 
 class _AddCarouselSliderState extends State<ImageToText> {
-  // File? imageFile;
-  // File? profilePicture;
   String? profilePictures;
   late String profilePictureUrl;
   late String result = '';
@@ -29,8 +25,7 @@ class _AddCarouselSliderState extends State<ImageToText> {
     final inputImage = InputImage.fromFilePath(image.path);
     final RecognizedText recogniseText =
         await GoogleMlKit.vision.textRecognizer().processImage(inputImage);
-    //  RecognizedText recogniseText = await textDetector.processImage(inputImage);
-    //  await textDetector.close();
+
     result = '';
     setState(() {
       for (TextBlock block in recogniseText.blocks) {
@@ -43,6 +38,7 @@ class _AddCarouselSliderState extends State<ImageToText> {
       }
     });
 
+    // ignore: avoid_print
     print('image to text: $result');
   }
 
@@ -51,9 +47,6 @@ class _AddCarouselSliderState extends State<ImageToText> {
     final image = await picker.pickImage(
         source: ImageSource.camera, maxHeight: 480, maxWidth: 480);
     if (image != null) {
-      // imageFile = File(image.path);
-      // profilePicture = File(image.path);
-
       setState(() {
         getTextFromImage(image);
       });
@@ -64,26 +57,9 @@ class _AddCarouselSliderState extends State<ImageToText> {
     const Uuid uuid = Uuid();
     String carouselId = uuid.v4();
 
-    // if (profilePicture != null) {
-    //   profilePictureUrl = await carouselSliderBloc.uploadProductProfileImage(
-    //     profilePicture!,
-    //     carouselId,
-    //   );
-    // }
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
-      // final CarouselSlideModel carouselSlider = CarouselSlideModel(
-      //   id: carouselId,
-      //   pictureUrl: profilePictureUrl,
-      //   createdBy: auth.currentUser()!.uid,
-      //   createdAt: Timestamp.now(),
-      // );
-      //  await carouselSliderBloc.saveCarouselSliderInfo(carouselSlider);
-      // Fluttertoast.showToast(
-      //   msg: 'L\'image est passée avec succès',
-      //   toastLength: Toast.LENGTH_LONG,
-      // );
       pd.close();
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
@@ -138,20 +114,6 @@ class _AddCarouselSliderState extends State<ImageToText> {
     );
   }
 
-  Widget buildPhoto() {
-    return GestureDetector(
-      onTap: pickImage,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child:
-            //  imageFile != null
-            //     ? Image.memory(imageFile!.readAsBytesSync())
-            //     :
-            CachedNetworkImage(imageUrl: profilePictures!),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,49 +152,13 @@ class _AddCarouselSliderState extends State<ImageToText> {
                     ),
                   ),
                 ),
-          //  if (imageFile == null && profilePictures == null)
           if (result == '' && !clickClear) Align(child: buildUploadButton()),
-
-          //  if (!(imageFile == null && profilePictures == null))
-          //    Align(child: SizedBox(child: buildPhoto())),
           if (result != '' || clickClear)
             Align(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Padding(
-                  //   padding:
-                  //       const EdgeInsets.only(right: 8, left: 8, bottom: 20),
-                  //   child: TextButton(
-                  //     onPressed: () {
-                  //       setState(() {
-                  //         result = '';
-                  //         clickClear = true;
-
-                  //         print('dlgj');
-                  //       });
-                  //     },
-                  //     style: ButtonStyle(
-                  //       backgroundColor: MaterialStateProperty.all<Color>(
-                  //         const Color(0xff5383EC),
-                  //       ),
-                  //       shape: MaterialStateProperty.all(
-                  //         RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(19),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     child: const Text(
-                  //       'Clear',
-                  //       style: TextStyle(
-                  //         color: Color(0xffFCFCFC),
-                  //         fontWeight: FontWeight.w600,
-                  //         fontSize: 18,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding:
                         const EdgeInsets.only(right: 8, left: 8, bottom: 20),
@@ -296,19 +222,6 @@ class _AddCarouselSliderState extends State<ImageToText> {
                 ],
               ),
             ),
-          // if (result == '' && !clickClear)
-          //   Align(
-          //     alignment: Alignment.bottomCenter,
-          //     child: Padding(
-          //       padding:
-          //           const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
-          //       child: ButtomMedia(
-          //         press: () {},
-          //         color: const Color(0xff5383EC),
-          //         text: 'Submit',
-          //       ),
-          //     ),
-          //   ),
         ],
       ),
     );

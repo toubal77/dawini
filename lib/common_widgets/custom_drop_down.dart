@@ -1,4 +1,3 @@
-import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropDown extends StatefulWidget {
@@ -23,6 +22,7 @@ class CustomDropDown extends StatefulWidget {
   final String? Function(String?)? validator;
   final Color fillColor;
   @override
+  // ignore: library_private_types_in_public_api
   _WilayaPickerState createState() => _WilayaPickerState();
 }
 
