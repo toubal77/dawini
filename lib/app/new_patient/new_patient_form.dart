@@ -169,7 +169,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              showAM(context);
+                              showAM(context).then((value) => setState(() {}));
                             },
                             child: const BuildButtomInfo(title: 'CHOISIR'),
                           ),
