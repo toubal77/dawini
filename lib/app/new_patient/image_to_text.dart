@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
+import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:dawini/constants/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -156,8 +157,23 @@ class _AddCarouselSliderState extends State<ImageToText> {
         children: [
           result != ''
               ? Padding(
-                  padding: EdgeInsets.only(top: 100.0, left: 20, right: 20),
-                  child: Text(result),
+                  padding:
+                      const EdgeInsets.only(top: 100.0, left: 20, right: 20),
+                  child: SizedBox(
+                    child: CustomTextForm(
+                      title:
+                          'Si aucune modification est envisagé clique sur suivant',
+                      initialValue: result,
+                      textInputAction: TextInputAction.done,
+                      lines: 10,
+                      onChanged: (var value) {
+                        result = value;
+                      },
+                      validator: (String? value) {
+                        return null;
+                      },
+                    ),
+                  ),
                 )
               : const Padding(
                   padding: EdgeInsets.only(top: 100.0, left: 20, right: 20),
@@ -172,21 +188,119 @@ class _AddCarouselSliderState extends State<ImageToText> {
                   ),
                 ),
           //  if (imageFile == null && profilePictures == null)
-          Align(child: buildUploadButton()),
+          if (result == '') Align(child: buildUploadButton()),
 
           //  if (!(imageFile == null && profilePictures == null))
           //    Align(child: SizedBox(child: buildPhoto())),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8, left: 8, bottom: 20),
-              child: ButtomMedia(
-                press: sendCarouselSliderInfo,
-                color: const Color(0xff5383EC),
-                text: 'Suivant',
+          if (result != '')
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (result != '')
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(right: 8, left: 8, bottom: 20),
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            result = '';
+                          });
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color(0xff5383EC),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(19),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'Clear',
+                          style: TextStyle(
+                            color: Color(0xffFCFCFC),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (result != '')
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(right: 8, left: 8, bottom: 20),
+                      child: TextButton(
+                        onPressed: sendCarouselSliderInfo,
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(
+                            const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color(0xff5383EC),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(19),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'Suivant',
+                          style: TextStyle(
+                            color: Color(0xffFCFCFC),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (result != '')
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(right: 8, left: 8, bottom: 20),
+                      child: TextButton(
+                        onPressed: pickImage,
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color(0xff5383EC),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(19),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'Prendre une photo',
+                          style: TextStyle(
+                            color: Color(0xffFCFCFC),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
-          ),
+          if (result == '')
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
+                child: ButtomMedia(
+                  press: () {},
+                  color: const Color(0xff5383EC),
+                  text: 'Submit',
+                ),
+              ),
+            ),
         ],
       ),
     );
