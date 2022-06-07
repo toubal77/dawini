@@ -61,10 +61,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
   // late Map<String, List<dynamic>> imagerieList = imagerieTypeMap;
-  late Map<String, Map<String, dynamic>> imagerieList = {};
+  late List<Map<String, dynamic>> imagerieList = [];
   late List<String> imagerie = [];
   late String imagerieString;
-  late String typeImagerie;
+  late String typeImagerie = '';
   var _expanded = false;
   @override
   Widget build(BuildContext context) {
@@ -359,18 +359,18 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         BuildListInfo(
                           listInfo: imagerie,
                         ),
-                      SizedBox(
-                        child: CustomTextForm(
-                          title: '',
-                          textInputAction: TextInputAction.done,
-                          onChanged: (var value) {
-                            imagerieString = value;
-                          },
-                          validator: (String? value) {
-                            return null;
-                          },
-                        ),
-                      ),
+                      // SizedBox(
+                      //   child: CustomTextForm(
+                      //     title: '',
+                      //     textInputAction: TextInputAction.done,
+                      //     onChanged: (var value) {
+                      //       imagerieString = value;
+                      //     },
+                      //     validator: (String? value) {
+                      //       return null;
+                      //     },
+                      //   ),
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -380,29 +380,33 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                   .push(MaterialPageRoute(builder: (context) {
                                 return const ImageToText();
                               }));
-                              setState(() {
-                                imagerie.add(result);
-                                imagerieList[typeImagerie]!.addAll({
-                                  'date': imagerieDate,
-                                  'conclusion': imagerie,
-                                });
-                              });
+
+                              //  if (typeImagerie != '') {
+                              imagerie.add(result);
+
+                              //  } else {
+                              //show error to choose type imagerie
+                              //   }
+                              setState(() {});
                             },
                             child: const BuildButtomInfo(title: 'IMAGE'),
                           ),
                           GestureDetector(
                             onTap: () async {
-                              setState(() {
-                                if (imagerieString != '') {
-                                  FocusScope.of(context)
-                                      .requestFocus(FocusNode());
-                                  imagerie.add(imagerieString);
-                                  imagerieList[typeImagerie]!.addAll({
-                                    'date': imagerieDate,
-                                    'conclusion': imagerie,
-                                  });
-                                }
-                              });
+                              //     if (imagerieString != '') {
+                              // FocusScope.of(context)
+                              //     .requestFocus(FocusNode());
+                              List<dynamic> data = [
+                                imagerieDate,
+                                imagerie,
+                              ];
+
+                              imagerieList.add({typeImagerie: data});
+
+                              print('flkg $imagerie');
+                              print('rgh orihg rgh $imagerieList');
+                              //   }
+                              setState(() {});
                             },
                             child: const BuildButtomInfo(title: 'ENVOYER'),
                           ),
