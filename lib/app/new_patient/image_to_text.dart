@@ -54,15 +54,12 @@ class _AddCarouselSliderState extends State<ImageToText> {
   }
 
   Future<void> sendCarouselSliderInfo() async {
-    const Uuid uuid = Uuid();
-    String carouselId = uuid.v4();
-
     try {
-      final ProgressDialog pd = ProgressDialog(context: context);
-
-      pd.close();
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pop();
+      if (result != '') {
+        Navigator.pop(context, result);
+      } else {
+        Navigator.pop(context, 'null');
+      }
     } on Exception catch (e) {
       PlatformExceptionAlertDialog(exception: e).show(context);
     }

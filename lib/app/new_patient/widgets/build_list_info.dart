@@ -24,8 +24,12 @@ class _BuildListInfoState extends State<BuildListInfo> {
           child: Row(
             children: [
               Flexible(
-                child: Text(
-                  '- ${widget.listInfo[index]}',
+                child: RichText(
+                  text: TextSpan(
+                    text: '- ${widget.listInfo[index]} ...',
+                    style: DefaultTextStyle.of(context).style,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(

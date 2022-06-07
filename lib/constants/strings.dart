@@ -13,6 +13,12 @@ const String invalidTypeImagerieError = 'Invalide type d\'imagerie';
 const String invalidClubActivitiesError = '';
 const String internetError =
     'pas de connexion Internet, assurez-vous que le wifi ou les données mobiles sont activés et réessayez';
+const List<String> imagerieTypeList = ['a', 'b', 'c'];
+const Map<String, List<dynamic>> imagerieTypeMap = {
+  'a': [],
+  'b': [],
+  'c': [],
+};
 const List<String> antecedentsMedicauxListName = [
   'Maladies cardiovasculaires',
   'Cancers',

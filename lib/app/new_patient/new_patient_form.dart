@@ -60,6 +60,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
+  // late Map<String, List<dynamic>> imagerieList = imagerieTypeMap;
+  late Map<String, Map<String, dynamic>> imagerieList = {};
   late List<String> imagerie = [];
   late String imagerieString;
   late String typeImagerie;
@@ -373,11 +375,18 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () {
-                              Navigator.of(context)
+                            onTap: () async {
+                              final String result = await Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
                                 return const ImageToText();
                               }));
+                              setState(() {
+                                imagerie.add(result);
+                                imagerieList[typeImagerie]!.addAll({
+                                  'date': imagerieDate,
+                                  'conclusion': imagerie,
+                                });
+                              });
                             },
                             child: const BuildButtomInfo(title: 'IMAGE'),
                           ),
@@ -388,7 +397,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                   FocusScope.of(context)
                                       .requestFocus(FocusNode());
                                   imagerie.add(imagerieString);
-                                  imagerieString = '';
+                                  imagerieList[typeImagerie]!.addAll({
+                                    'date': imagerieDate,
+                                    'conclusion': imagerie,
+                                  });
                                 }
                               });
                             },

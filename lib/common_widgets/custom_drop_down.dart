@@ -1,3 +1,4 @@
+import 'package:dawini/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropDown extends StatefulWidget {
@@ -27,7 +28,7 @@ class CustomDropDown extends StatefulWidget {
 }
 
 class _WilayaPickerState extends State<CustomDropDown> {
-  late List<String> options = ['a', 'a', 'a'];
+  late List<String> options = imagerieTypeList;
   String? dropdownValue;
 
   @override
