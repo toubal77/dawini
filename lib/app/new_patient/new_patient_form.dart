@@ -61,8 +61,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
   // late Map<String, List<dynamic>> imagerieList = imagerieTypeMap;
-  late List<Map<String, dynamic>> imagerieList = [];
-  late List<String> imagerie = [];
+  late List<List> imagerieList = [];
+  late String imagerie = '';
   late String imagerieString;
   late String typeImagerie = '';
   var _expanded = false;
@@ -355,10 +355,35 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (imagerie.isNotEmpty)
-                        BuildListInfo(
-                          listInfo: imagerie,
-                        ),
+                      if (imagerie != '')
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: '- $imagerie',
+                                      style: const TextStyle(
+                                          color: Colors.black, fontSize: 13),
+                                    ),
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      imagerie = '';
+                                    });
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ],
+                            )),
                       // SizedBox(
                       //   child: CustomTextForm(
                       //     title: '',
@@ -381,31 +406,34 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 return const ImageToText();
                               }));
 
-                              //  if (typeImagerie != '') {
-                              imagerie.add(result);
-
-                              //  } else {
-                              //show error to choose type imagerie
-                              //   }
+                              if (imagerie.isNotEmpty) {
+                                imagerie = '';
+                                imagerie = result;
+                              } else {
+                                imagerie = result;
+                              }
                               setState(() {});
                             },
                             child: const BuildButtomInfo(title: 'IMAGE'),
                           ),
                           GestureDetector(
                             onTap: () async {
-                              //     if (imagerieString != '') {
-                              // FocusScope.of(context)
-                              //     .requestFocus(FocusNode());
-                              List<dynamic> data = [
-                                imagerieDate,
-                                imagerie,
-                              ];
-
-                              imagerieList.add({typeImagerie: data});
-
-                              print('flkg $imagerie');
-                              print('rgh orihg rgh $imagerieList');
-                              //   }
+                              if (typeImagerie != '') {
+                                List data = [
+                                  typeImagerie,
+                                  imagerieDate,
+                                  imagerie,
+                                ];
+                                imagerieList.add(data);
+                                typeImagerie = '';
+                                imagerieDate = DateTime.now();
+                                imagerie = '';
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Veuillez sélectionner type d\'imagerie')));
+                              }
                               setState(() {});
                             },
                             child: const BuildButtomInfo(title: 'ENVOYER'),
