@@ -24,6 +24,7 @@ class _AddCarouselSliderState extends State<ImageToText> {
   String? profilePictures;
   late String profilePictureUrl;
   late String result = '';
+  late bool clickClear = false;
   getTextFromImage(XFile image) async {
     final inputImage = InputImage.fromFilePath(image.path);
     final RecognizedText recogniseText =
@@ -41,6 +42,7 @@ class _AddCarouselSliderState extends State<ImageToText> {
         result += "\n";
       }
     });
+
     print('image to text: $result');
   }
 
@@ -51,9 +53,10 @@ class _AddCarouselSliderState extends State<ImageToText> {
     if (image != null) {
       // imageFile = File(image.path);
       // profilePicture = File(image.path);
-      getTextFromImage(image);
 
-      setState(() {});
+      setState(() {
+        getTextFromImage(image);
+      });
     }
   }
 
@@ -188,119 +191,124 @@ class _AddCarouselSliderState extends State<ImageToText> {
                   ),
                 ),
           //  if (imageFile == null && profilePictures == null)
-          if (result == '') Align(child: buildUploadButton()),
+          if (result == '' && !clickClear) Align(child: buildUploadButton()),
 
           //  if (!(imageFile == null && profilePictures == null))
           //    Align(child: SizedBox(child: buildPhoto())),
-          if (result != '')
+          if (result != '' || clickClear)
             Align(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (result != '')
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 8, left: 8, bottom: 20),
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            result = '';
-                          });
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xff5383EC),
-                          ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(19),
-                            ),
-                          ),
-                        ),
-                        child: const Text(
-                          'Clear',
-                          style: TextStyle(
-                            color: Color(0xffFCFCFC),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  if (result != '')
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 8, left: 8, bottom: 20),
-                      child: TextButton(
-                        onPressed: sendCarouselSliderInfo,
-                        style: ButtonStyle(
-                          textStyle: MaterialStateProperty.all(
-                            const TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xff5383EC),
-                          ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(19),
-                            ),
+                  // Padding(
+                  //   padding:
+                  //       const EdgeInsets.only(right: 8, left: 8, bottom: 20),
+                  //   child: TextButton(
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         result = '';
+                  //         clickClear = true;
+
+                  //         print('dlgj');
+                  //       });
+                  //     },
+                  //     style: ButtonStyle(
+                  //       backgroundColor: MaterialStateProperty.all<Color>(
+                  //         const Color(0xff5383EC),
+                  //       ),
+                  //       shape: MaterialStateProperty.all(
+                  //         RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(19),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     child: const Text(
+                  //       'Clear',
+                  //       style: TextStyle(
+                  //         color: Color(0xffFCFCFC),
+                  //         fontWeight: FontWeight.w600,
+                  //         fontSize: 18,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 8, left: 8, bottom: 20),
+                    child: TextButton(
+                      onPressed: sendCarouselSliderInfo,
+                      style: ButtonStyle(
+                        textStyle: MaterialStateProperty.all(
+                          const TextStyle(
+                            color: Colors.white,
                           ),
                         ),
-                        child: const Text(
-                          'Suivant',
-                          style: TextStyle(
-                            color: Color(0xffFCFCFC),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color(0xff5383EC),
+                        ),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(19),
                           ),
                         ),
                       ),
-                    ),
-                  if (result != '')
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 8, left: 8, bottom: 20),
-                      child: TextButton(
-                        onPressed: pickImage,
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xff5383EC),
-                          ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(19),
-                            ),
-                          ),
-                        ),
-                        child: const Text(
-                          'Prendre une photo',
-                          style: TextStyle(
-                            color: Color(0xffFCFCFC),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
+                      child: const Text(
+                        'Suivant',
+                        style: TextStyle(
+                          color: Color(0xffFCFCFC),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
                         ),
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 8, left: 8, bottom: 20),
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          result = '';
+                        });
+                        pickImage();
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color(0xff5383EC),
+                        ),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(19),
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Prendre une photo',
+                        style: TextStyle(
+                          color: Color(0xffFCFCFC),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-          if (result == '')
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
-                child: ButtomMedia(
-                  press: () {},
-                  color: const Color(0xff5383EC),
-                  text: 'Submit',
-                ),
-              ),
-            ),
+          // if (result == '' && !clickClear)
+          //   Align(
+          //     alignment: Alignment.bottomCenter,
+          //     child: Padding(
+          //       padding:
+          //           const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
+          //       child: ButtomMedia(
+          //         press: () {},
+          //         color: const Color(0xff5383EC),
+          //         text: 'Submit',
+          //       ),
+          //     ),
+          //   ),
         ],
       ),
     );
