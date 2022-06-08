@@ -15,7 +15,6 @@ import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/constants/app_colors.dart';
 import 'package:dawini/constants/strings.dart';
-import 'package:dawini/utils/validators.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class NewPatientForm extends StatefulWidget {
@@ -459,7 +458,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 'list': signeFonctionnelList
                               };
                             } else {
-                              print('flghi');
                               signeFonctionnel = {};
                             }
                             if (examenCliniqueList!.isEmpty) {
@@ -468,7 +466,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 'list': examenCliniqueList
                               };
                             } else {
-                              print('flghi');
                               examenClinique = {};
                             }
                             if (examenBiologiqueList!.isEmpty) {
@@ -477,17 +474,10 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 'list': examenBiologiqueList
                               };
                             } else {
-                              print('flghi');
                               examenBiologique = {};
                             }
-                            if (imagerieList!.isEmpty) {
-                              print('flghi');
-                              imagerieList = [];
-                            }
-                            print('signeFonctionnel: $signeFonctionnel');
-                            print('examenBiologique: $examenBiologique');
-                            print('examenClinique: $examenClinique');
-                            print('imagerie: $imagerieList');
+                            if (imagerieList!.isEmpty) {}
+
                             if (nom != '' ||
                                 prenom != '' ||
                                 age != 0 ||

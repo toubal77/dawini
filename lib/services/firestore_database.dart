@@ -4,6 +4,7 @@ import 'package:dawini/services/database.dart';
 class FirestoreDatabase implements Database {
   @override
   String getUniqueId() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final String _randomId =
         FirebaseFirestore.instance.collection(' ').doc().id;
     return _randomId;
@@ -66,6 +67,7 @@ class FirestoreDatabase implements Database {
     bool merge = true,
   }) async {
     final dcumentReference = FirebaseFirestore.instance.doc(path);
+    // ignore: avoid_print
     print('set $path: $data');
     await dcumentReference.set(data, SetOptions(merge: merge));
   }
@@ -76,6 +78,7 @@ class FirestoreDatabase implements Database {
     required Map<String, dynamic> data,
   }) async {
     final dcumentReference = FirebaseFirestore.instance.doc(path);
+    // ignore: avoid_print
     print('set $path: $data');
     await dcumentReference.update(data);
   }
@@ -88,6 +91,7 @@ class FirestoreDatabase implements Database {
     final CollectionReference<Map<String, dynamic>> collectionReference =
         FirebaseFirestore.instance.collection(path);
 
+    // ignore: avoid_print
     print('created ${collectionReference.path}: $data');
     await collectionReference.add(data);
   }
@@ -154,6 +158,7 @@ class FirestoreDatabase implements Database {
   @override
   Future<void> deleteDocument({required String path}) async {
     final reference = FirebaseFirestore.instance.doc(path);
+    // ignore: avoid_print
     print('delete: $path');
     await reference.delete();
   }
