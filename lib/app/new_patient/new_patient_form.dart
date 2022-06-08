@@ -452,7 +452,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         press: () {
                           FocusScope.of(context).requestFocus(FocusNode());
                           if (_formKey.currentState!.validate()) {
-                            if (signeFonctionnelList!.isEmpty) {
+                            if (signeFonctionnelList!.isNotEmpty) {
                               signeFonctionnel = {
                                 'date': signeFonctionnelDate,
                                 'list': signeFonctionnelList
@@ -460,7 +460,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             } else {
                               signeFonctionnel = {};
                             }
-                            if (examenCliniqueList!.isEmpty) {
+                            if (examenCliniqueList!.isNotEmpty) {
                               examenClinique = {
                                 'date': examenCliniqueDate,
                                 'list': examenCliniqueList
@@ -468,7 +468,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             } else {
                               examenClinique = {};
                             }
-                            if (examenBiologiqueList!.isEmpty) {
+                            if (examenBiologiqueList!.isNotEmpty) {
                               examenBiologique = {
                                 'date': examenBiologiqueDate,
                                 'list': examenBiologiqueList
