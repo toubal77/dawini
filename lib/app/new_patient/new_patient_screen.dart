@@ -1,3 +1,4 @@
+import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_bloc.dart';
 import 'package:dawini/app/new_patient/new_patient_form.dart';
 import 'package:dawini/common_widgets/platform_exception_alert_dialog.dart';
@@ -20,15 +21,15 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
   late final PageController _pageController;
 
   late final NewPatientBloc bloc;
-  late String nom = '';
-  late String prenom = '';
+  late String nom;
+  late String prenom;
   late int age;
-  late List<String> antecedentsMedicaux = [];
-  late List<String> antecedentsChirurgicaux = [];
-  late List<dynamic> signeFonctionnel = [];
-  late List<dynamic> examenClinique = [];
-  late List<dynamic> examenBiologique = [];
-  late List<List> imagerieList = [];
+  late List<String> antecedentsMedicaux;
+  late List<String> antecedentsChirurgicaux;
+  late List<dynamic> signeFonctionnel;
+  late List<dynamic> examenClinique;
+  late List<dynamic> examenBiologique;
+  late List<List> imagerieList;
 
   @override
   void initState() {
@@ -50,8 +51,10 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
     }
   }
 
-  Future<void> sendInfo() async {
-    try {} on Exception catch (e) {
+  Future<void> sendInfo(Patient patient) async {
+    try {
+      bloc.addNewPatient(patient);
+    } on Exception catch (e) {
       PlatformExceptionAlertDialog(exception: e).show(context);
     }
   }
@@ -98,8 +101,21 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               examenClinique = examenClinique;
               examenBiologique = examenBiologique;
               imagerieList = imagerieList;
-              //    swipePage(1);
-              sendInfo();
+              Patient patient = Patient(
+                age: age,
+                antecedentsChirurgicaux: antecedentsChirurgicaux,
+                room: 'room',
+                id: '',
+                bed: 'bed',
+                examenBiologique: examenBiologique,
+                examenClinique: examenClinique,
+                antecedentsMedicaux: antecedentsMedicaux,
+                imagerie: imagerieList,
+                nom: nom,
+                prenom: prenom,
+                signeFonctionnel: signeFonctionnel,
+              );
+              sendInfo(patient);
             },
           ),
         ],

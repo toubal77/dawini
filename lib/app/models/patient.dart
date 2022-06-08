@@ -15,8 +15,8 @@ class Patient {
   });
 
   final String id;
-  final String room;
-  final String bed;
+  final String? room;
+  final String? bed;
   final String nom;
   final String prenom;
   final int age;
@@ -29,8 +29,8 @@ class Patient {
 
   factory Patient.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
-    final String room = data['romm'] as String;
-    final String bed = data['bed'] as String;
+    final String? room = data['romm'] as String?;
+    final String? bed = data['bed'] as String?;
     final String nom = data['nom'] as String;
     final String prenom = data['prenom'] as String;
     final int age = data['age'] as int;

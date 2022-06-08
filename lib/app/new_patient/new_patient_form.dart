@@ -466,6 +466,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             print('signeFonctionnel: $signeFonctionnel');
                             print('examenBiologique: $examenBiologique');
                             print('examenClinique: $examenClinique');
+                            print('imagerie: $imagerieList');
                             widget.onSaved(
                               nom: nom,
                               prenom: prenom,
