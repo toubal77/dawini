@@ -31,6 +31,7 @@ class NewPatientForm extends StatefulWidget {
     required List<dynamic> signeFonctionnel,
     required List<dynamic> examenClinique,
     required List<dynamic> examenBiologique,
+    required List<List> imagerieList,
   }) onSaved;
 
   @override
@@ -462,6 +463,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                               examenBiologiqueDate,
                               examenBiologiqueList
                             ];
+                            print('signeFonctionnel: $signeFonctionnel');
+                            print('examenBiologique: $examenBiologique');
+                            print('examenClinique: $examenClinique');
                             widget.onSaved(
                               nom: nom,
                               prenom: prenom,
@@ -471,6 +475,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                               signeFonctionnel: signeFonctionnel,
                               examenClinique: examenClinique,
                               examenBiologique: examenBiologique,
+                              imagerieList: imagerieList,
                             );
                           }
                         },

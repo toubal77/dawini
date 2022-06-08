@@ -1,7 +1,10 @@
+import 'package:dawini/app/new_patient/new_patient_bloc.dart';
 import 'package:dawini/app/new_patient/new_patient_form.dart';
 import 'package:dawini/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:dawini/common_widgets/size_config.dart';
+import 'package:dawini/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewPatientScreen extends StatefulWidget {
   const NewPatientScreen({
@@ -16,19 +19,24 @@ class NewPatientScreen extends StatefulWidget {
 class _NewPatientScreenState extends State<NewPatientScreen> {
   late final PageController _pageController;
 
+  late final NewPatientBloc bloc;
   late String nom = '';
   late String prenom = '';
   late int age;
   late List<String> antecedentsMedicaux = [];
   late List<String> antecedentsChirurgicaux = [];
-  late List<String> signeFonctionnel = [];
-  late List<String> examenClinique = [];
-  late List<String> examenBiologique = [];
+  late List<dynamic> signeFonctionnel = [];
+  late List<dynamic> examenClinique = [];
+  late List<dynamic> examenBiologique = [];
+  late List<List> imagerieList = [];
 
   @override
   void initState() {
     _pageController = PageController();
-
+    final Database database = context.read<Database>();
+    bloc = NewPatientBloc(
+      database: database,
+    );
     super.initState();
   }
 
@@ -79,6 +87,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               required List<dynamic> signeFonctionnel,
               required List<dynamic> examenClinique,
               required List<dynamic> examenBiologique,
+              required List<List> imagerieList,
             }) {
               nom = nom;
               prenom = prenom;
@@ -88,6 +97,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               signeFonctionnel = signeFonctionnel;
               examenClinique = examenClinique;
               examenBiologique = examenBiologique;
+              imagerieList = imagerieList;
               //    swipePage(1);
               sendInfo();
             },
