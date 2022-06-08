@@ -28,10 +28,10 @@ class NewPatientForm extends StatefulWidget {
     required int age,
     required List<String> antecedentsMedicaux,
     required List<String> antecedentsChirurgicaux,
-    required List<dynamic> signeFonctionnel,
-    required List<dynamic> examenClinique,
-    required List<dynamic> examenBiologique,
-    required List<List> imagerieList,
+    required Map signeFonctionnel,
+    required Map examenClinique,
+    required Map examenBiologique,
+    required List<Map> imagerieList,
   }) onSaved;
 
   @override
@@ -53,18 +53,18 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late List<String> antecedentsChirurgicaux = [];
   late String signeFonctionnelString;
   late List<String> signeFonctionnelList = [];
-  late List<dynamic> signeFonctionnel = [];
+  late Map signeFonctionnel = {};
   late String examenCliniqueString;
   late List<String> examenCliniqueList = [];
-  late List<dynamic> examenClinique = [];
+  late Map examenClinique = {};
   late String examenBiologiqueString;
-  late List<dynamic> examenBiologique = [];
+  late Map examenBiologique = {};
   late List<String> examenBiologiqueList = [];
   late DateTime signeFonctionnelDate = DateTime.now();
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
-  late List<List> imagerieList = [];
+  late List<Map> imagerieList = [];
   late List<String> imagerie = [];
   late String imagerieString;
   late String typeImagerie = '';
@@ -410,11 +410,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           GestureDetector(
                             onTap: () async {
                               if (typeImagerie != '' && imagerie.isNotEmpty) {
-                                List data = [
-                                  typeImagerie,
-                                  imagerieDate,
-                                  imagerie,
-                                ];
+                                Map data = {
+                                  'typeImagerie': typeImagerie,
+                                  'imagerieDate': imagerieDate,
+                                  'imagerie': imagerie,
+                                };
                                 imagerieList.add(data);
                                 typeImagerie = '';
                                 imagerieDate = DateTime.now();
@@ -451,18 +451,18 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         press: () {
                           FocusScope.of(context).requestFocus(FocusNode());
                           if (_formKey.currentState!.validate()) {
-                            signeFonctionnel = [
-                              signeFonctionnelDate,
-                              signeFonctionnelList
-                            ];
-                            examenClinique = [
-                              examenCliniqueDate,
-                              examenCliniqueList
-                            ];
-                            examenBiologique = [
-                              examenBiologiqueDate,
-                              examenBiologiqueList
-                            ];
+                            signeFonctionnel = {
+                              'date': signeFonctionnelDate,
+                              'list': signeFonctionnelList
+                            };
+                            examenClinique = {
+                              'date': examenCliniqueDate,
+                              'list': examenCliniqueList
+                            };
+                            examenBiologique = {
+                              'date': examenBiologiqueDate,
+                              'list': examenBiologiqueList
+                            };
                             print('signeFonctionnel: $signeFonctionnel');
                             print('examenBiologique: $examenBiologique');
                             print('examenClinique: $examenClinique');

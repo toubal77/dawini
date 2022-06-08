@@ -22,10 +22,10 @@ class Patient {
   final int age;
   final List<String>? antecedentsMedicaux;
   final List<String>? antecedentsChirurgicaux;
-  final List<dynamic>? signeFonctionnel;
-  final List<dynamic>? examenClinique;
-  final List<dynamic>? examenBiologique;
-  final List imagerie;
+  final Map? signeFonctionnel;
+  final Map? examenClinique;
+  final Map? examenBiologique;
+  final List<Map> imagerie;
 
   factory Patient.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
@@ -38,13 +38,10 @@ class Patient {
         data['antecedentsMedicaux'] as List<String>?;
     final List<String>? antecedentsChirurgicaux =
         data['antecedentsChirurgicaux'] as List<String>?;
-    final List<dynamic>? signeFonctionnel =
-        data['signeFonctionnel'] as List<dynamic>?;
-    final List<dynamic>? examenClinique =
-        data['examenClinique'] as List<dynamic>?;
-    final List<dynamic>? examenBiologique =
-        data['examenBiologique'] as List<dynamic>?;
-    final List imagerie = data['imagerie'] as List;
+    final Map? signeFonctionnel = data['signeFonctionnel'] as Map?;
+    final Map? examenClinique = data['examenClinique'] as Map?;
+    final Map? examenBiologique = data['examenBiologique'] as Map?;
+    final List<Map> imagerie = data['imagerie'] as List<Map>;
 
     return Patient(
       id: id,

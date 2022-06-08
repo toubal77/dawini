@@ -1,31 +1,39 @@
 {
-    "project_info": {
-        "project_number": "842388723485",
-        "project_id": "dawini-205af",
-        "storage_bucket": "dawini-205af.appspot.com"
-    },
-    "client": [{
-        "client_info": {
-            "mobilesdk_app_id": "1:842388723485:android:105c4653ff2bac98f6f3f4",
-            "android_client_info": {
-                "package_name": "com.example.dawini"
-            }
-        },
-        "oauth_client": [{
-            "client_id": "842388723485-6rpr3323s54tm5jshogfe48l7k86j7kn.apps.googleusercontent.com",
-            "client_type": 3
-        }],
-        "api_key": [{
-            "current_key": "AIzaSyDU4S_a5kxF4crXgAViL9qYtnSOAsObsTs"
-        }],
-        "services": {
-            "appinvite_service": {
-                "other_platform_oauth_client": [{
-                    "client_id": "842388723485-6rpr3323s54tm5jshogfe48l7k86j7kn.apps.googleusercontent.com",
-                    "client_type": 3
-                }]
-            }
+  "project_info": {
+    "project_number": "22854713552",
+    "project_id": "dawini-2805a",
+    "storage_bucket": "dawini-2805a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22854713552:android:e6afee97e51aedc256ded5",
+        "android_client_info": {
+          "package_name": "com.example.dawini"
         }
-    }],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "22854713552-4nhobgpmrbn9vvv2t5tb2kos48cbpuvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTVwOzp92Za02rgX07cDQafnHImPHZfts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22854713552-4nhobgpmrbn9vvv2t5tb2kos48cbpuvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }
