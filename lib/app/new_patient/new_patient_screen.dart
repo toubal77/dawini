@@ -89,15 +89,15 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
         children: <Widget>[
           NewPatientForm(
             onSaved: ({
-              required String nom,
-              required String prenom,
-              required int age,
-              required List<String> antecedentsMedicaux,
-              required List<String> antecedentsChirurgicaux,
-              required Map signeFonctionnel,
-              required Map examenClinique,
-              required Map examenBiologique,
-              required List<Map> imagerieList,
+              required String? nom,
+              required String? prenom,
+              required int? age,
+              required List<String>? antecedentsMedicaux,
+              required List<String>? antecedentsChirurgicaux,
+              required Map? signeFonctionnel,
+              required Map? examenClinique,
+              required Map? examenBiologique,
+              required List<Map>? imagerieList,
             }) {
               nom = nom;
               prenom = prenom;

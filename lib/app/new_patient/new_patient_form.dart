@@ -16,6 +16,7 @@ import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/constants/app_colors.dart';
 import 'package:dawini/constants/strings.dart';
 import 'package:dawini/utils/validators.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class NewPatientForm extends StatefulWidget {
   const NewPatientForm({
@@ -23,15 +24,15 @@ class NewPatientForm extends StatefulWidget {
     required this.onSaved,
   }) : super(key: key);
   final void Function({
-    required String nom,
-    required String prenom,
-    required int age,
-    required List<String> antecedentsMedicaux,
-    required List<String> antecedentsChirurgicaux,
-    required Map signeFonctionnel,
-    required Map examenClinique,
-    required Map examenBiologique,
-    required List<Map> imagerieList,
+    required String? nom,
+    required String? prenom,
+    required int? age,
+    required List<String>? antecedentsMedicaux,
+    required List<String>? antecedentsChirurgicaux,
+    required Map? signeFonctionnel,
+    required Map? examenClinique,
+    required Map? examenBiologique,
+    required List<Map>? imagerieList,
   }) onSaved;
 
   @override
@@ -40,34 +41,34 @@ class NewPatientForm extends StatefulWidget {
 
 class _NewPatientFormState extends State<NewPatientForm> {
   late final _formKey = GlobalKey<FormState>();
-  late String nom = '';
-  late String prenom = '';
-  late int age;
+  late String? nom = '';
+  late String? prenom = '';
+  late int? age = 0;
   late String antecedentsMedicauxString;
-  late List<String> antecedentsMedicaux = [];
+  late List<String>? antecedentsMedicaux = [];
   late List<String> antecedentsMedicauxListNameKey =
       antecedentsMedicauxListName;
   late Map<String, List<String>> antecedentsMedicauxList =
       antecedentsMedicauxMap;
   late String antecedentsChirurgicauxString;
-  late List<String> antecedentsChirurgicaux = [];
+  late List<String>? antecedentsChirurgicaux = [];
   late String signeFonctionnelString;
-  late List<String> signeFonctionnelList = [];
-  late Map signeFonctionnel = {};
+  late List<String>? signeFonctionnelList = [];
+  late Map? signeFonctionnel = {};
   late String examenCliniqueString;
-  late List<String> examenCliniqueList = [];
-  late Map examenClinique = {};
+  late List<String>? examenCliniqueList = [];
+  late Map? examenClinique = {};
   late String examenBiologiqueString;
-  late Map examenBiologique = {};
-  late List<String> examenBiologiqueList = [];
+  late Map? examenBiologique = {};
+  late List<String>? examenBiologiqueList = [];
   late DateTime signeFonctionnelDate = DateTime.now();
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
-  late List<Map> imagerieList = [];
-  late List<String> imagerie = [];
+  late List<Map>? imagerieList = [];
+  late List<String>? imagerie = [];
   late String imagerieString;
-  late String typeImagerie = '';
+  late String typeImagerie;
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +100,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             nom = value;
                           },
                           validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return invalidNameError;
-                            }
+                            // if (value!.isEmpty) {
+                            //   return invalidNameError;
+                            // }
 
                             return null;
                           },
@@ -118,9 +119,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             prenom = value;
                           },
                           validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return invalidPrenomError;
-                            }
+                            // if (value!.isEmpty) {
+                            //   return invalidPrenomError;
+                            // }
 
                             return null;
                           },
@@ -138,11 +139,12 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             age = int.parse(value);
                           },
                           validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return invalidAgeError;
-                            } else if (!Validators.isValidNumber(value)) {
-                              return invalidAgeTypeError;
-                            }
+                            // if (value!.isEmpty) {
+                            //   return invalidAgeError;
+                            // } else
+                            // if (!Validators.isValidNumber(value)) {
+                            //   return invalidAgeTypeError;
+                            // }
 
                             return null;
                           },
@@ -152,7 +154,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         height: 15,
                       ),
                       const BuildTitleInfo(text: 'Antécédents medicaux:'),
-                      if (antecedentsMedicaux.isNotEmpty)
+                      if (antecedentsMedicaux!.isNotEmpty)
                         BuildListInfo(
                           listInfo: antecedentsMedicaux,
                         ),
@@ -183,7 +185,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 if (antecedentsMedicauxString != '') {
                                   FocusScope.of(context)
                                       .requestFocus(FocusNode());
-                                  antecedentsMedicaux
+                                  antecedentsMedicaux!
                                       .add(antecedentsMedicauxString);
                                   antecedentsMedicauxString = '';
                                 }
@@ -194,7 +196,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         ],
                       ),
                       const BuildTitleInfo(text: 'Antécédents chirurgicaux:'),
-                      if (antecedentsChirurgicaux.isNotEmpty)
+                      if (antecedentsChirurgicaux!.isNotEmpty)
                         BuildListInfo(
                           listInfo: antecedentsChirurgicaux,
                         ),
@@ -215,7 +217,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           setState(() {
                             if (antecedentsChirurgicauxString != '') {
                               FocusScope.of(context).requestFocus(FocusNode());
-                              antecedentsChirurgicaux
+                              antecedentsChirurgicaux!
                                   .add(antecedentsChirurgicauxString);
                               antecedentsChirurgicauxString = '';
                             }
@@ -232,7 +234,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (signeFonctionnelList.isNotEmpty)
+                      if (signeFonctionnelList!.isNotEmpty)
                         BuildListInfo(
                           listInfo: signeFonctionnelList,
                         ),
@@ -253,7 +255,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           setState(() {
                             if (signeFonctionnelString != '') {
                               FocusScope.of(context).requestFocus(FocusNode());
-                              signeFonctionnelList.add(signeFonctionnelString);
+                              signeFonctionnelList!.add(signeFonctionnelString);
                               signeFonctionnelString = '';
                             }
                           });
@@ -269,7 +271,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (examenCliniqueList.isNotEmpty)
+                      if (examenCliniqueList!.isNotEmpty)
                         BuildListInfo(
                           listInfo: examenCliniqueList,
                         ),
@@ -290,7 +292,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           setState(() {
                             if (examenCliniqueString != '') {
                               FocusScope.of(context).requestFocus(FocusNode());
-                              examenCliniqueList.add(examenCliniqueString);
+                              examenCliniqueList!.add(examenCliniqueString);
                               examenCliniqueString = '';
                             }
                           });
@@ -306,7 +308,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (examenBiologiqueList.isNotEmpty)
+                      if (examenBiologiqueList!.isNotEmpty)
                         BuildListInfo(
                           listInfo: examenBiologiqueList,
                         ),
@@ -327,7 +329,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           setState(() {
                             if (examenBiologiqueString != '') {
                               FocusScope.of(context).requestFocus(FocusNode());
-                              examenBiologiqueList.add(examenBiologiqueString);
+                              examenBiologiqueList!.add(examenBiologiqueString);
                               examenBiologiqueString = '';
                             }
                           });
@@ -357,7 +359,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (imagerie.isNotEmpty)
+                      if (imagerie!.isNotEmpty)
                         BuildListInfo(
                           listInfo: imagerie,
                         ),
@@ -369,7 +371,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                               onPressed: () {
                                 if (typeImagerie != '') {
                                   if (imagerieString != '') {
-                                    imagerie.add(imagerieString);
+                                    imagerie!.add(imagerieString);
                                     imagerieString = '';
                                   }
                                   setState(() {});
@@ -401,7 +403,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                   .push(MaterialPageRoute(builder: (context) {
                                 return const ImageToText();
                               }));
-                              imagerie.add(result);
+                              imagerie!.add(result);
 
                               setState(() {});
                             },
@@ -409,13 +411,13 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              if (typeImagerie != '' && imagerie.isNotEmpty) {
+                              if (typeImagerie != '' && imagerie!.isNotEmpty) {
                                 Map data = {
                                   'typeImagerie': typeImagerie,
                                   'imagerieDate': imagerieDate,
                                   'imagerie': imagerie,
                                 };
-                                imagerieList.add(data);
+                                imagerieList!.add(data);
                                 typeImagerie = '';
                                 imagerieDate = DateTime.now();
                                 imagerie = [];
@@ -431,7 +433,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                           content: Text(
                                               'Veuillez sélectionner type d\'imagerie')));
                                 }
-                                if (imagerie.isEmpty) {
+                                if (imagerie!.isEmpty) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                           content: Text(
@@ -451,33 +453,73 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         press: () {
                           FocusScope.of(context).requestFocus(FocusNode());
                           if (_formKey.currentState!.validate()) {
-                            signeFonctionnel = {
-                              'date': signeFonctionnelDate,
-                              'list': signeFonctionnelList
-                            };
-                            examenClinique = {
-                              'date': examenCliniqueDate,
-                              'list': examenCliniqueList
-                            };
-                            examenBiologique = {
-                              'date': examenBiologiqueDate,
-                              'list': examenBiologiqueList
-                            };
+                            if (signeFonctionnelList!.isEmpty) {
+                              signeFonctionnel = {
+                                'date': signeFonctionnelDate,
+                                'list': signeFonctionnelList
+                              };
+                            } else {
+                              print('flghi');
+                              signeFonctionnel = {};
+                            }
+                            if (examenCliniqueList!.isEmpty) {
+                              examenClinique = {
+                                'date': examenCliniqueDate,
+                                'list': examenCliniqueList
+                              };
+                            } else {
+                              print('flghi');
+                              examenClinique = {};
+                            }
+                            if (examenBiologiqueList!.isEmpty) {
+                              examenBiologique = {
+                                'date': examenBiologiqueDate,
+                                'list': examenBiologiqueList
+                              };
+                            } else {
+                              print('flghi');
+                              examenBiologique = {};
+                            }
+                            if (imagerieList!.isEmpty) {
+                              print('flghi');
+                              imagerieList = [];
+                            }
                             print('signeFonctionnel: $signeFonctionnel');
                             print('examenBiologique: $examenBiologique');
                             print('examenClinique: $examenClinique');
                             print('imagerie: $imagerieList');
-                            widget.onSaved(
-                              nom: nom,
-                              prenom: prenom,
-                              age: age,
-                              antecedentsMedicaux: antecedentsMedicaux,
-                              antecedentsChirurgicaux: antecedentsChirurgicaux,
-                              signeFonctionnel: signeFonctionnel,
-                              examenClinique: examenClinique,
-                              examenBiologique: examenBiologique,
-                              imagerieList: imagerieList,
-                            );
+                            if (nom != '' ||
+                                prenom != '' ||
+                                age != 0 ||
+                                antecedentsMedicaux!.isNotEmpty ||
+                                antecedentsChirurgicaux!.isNotEmpty ||
+                                signeFonctionnelList!.isNotEmpty ||
+                                examenBiologiqueList!.isNotEmpty ||
+                                examenCliniqueList!.isNotEmpty ||
+                                imagerieList!.isNotEmpty) {
+                              widget.onSaved(
+                                nom: nom ?? nom,
+                                prenom: prenom ?? prenom,
+                                age: age ?? age,
+                                antecedentsMedicaux:
+                                    antecedentsMedicaux ?? antecedentsMedicaux,
+                                antecedentsChirurgicaux:
+                                    antecedentsChirurgicaux ??
+                                        antecedentsChirurgicaux,
+                                signeFonctionnel:
+                                    signeFonctionnel ?? signeFonctionnel,
+                                examenClinique:
+                                    examenClinique ?? examenClinique,
+                                examenBiologique:
+                                    examenBiologique ?? examenBiologique,
+                                imagerieList: imagerieList ?? imagerieList,
+                              );
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: 'Veullez au moins remplire une case',
+                                toastLength: Toast.LENGTH_LONG,
+                              );
+                            }
                           }
                         },
                         color: const Color(0xff5383EC),
@@ -576,12 +618,12 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                           GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                if (!antecedentsMedicaux.contains(
+                                                if (!antecedentsMedicaux!.contains(
                                                     antecedentsMedicauxListName)) {
                                                   FocusScope.of(context)
                                                       .requestFocus(
                                                           FocusNode());
-                                                  antecedentsMedicaux.add(
+                                                  antecedentsMedicaux!.add(
                                                       antecedentsMedicauxListName);
                                                 }
                                               });
