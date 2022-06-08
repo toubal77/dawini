@@ -28,9 +28,9 @@ class NewPatientForm extends StatefulWidget {
     required int age,
     required List<String> antecedentsMedicaux,
     required List<String> antecedentsChirurgicaux,
-    required List<String> signeFonctionnel,
-    required List<String> examenClinique,
-    required List<String> examenBiologique,
+    required List<dynamic> signeFonctionnel,
+    required List<dynamic> examenClinique,
+    required List<dynamic> examenBiologique,
   }) onSaved;
 
   @override
@@ -51,11 +51,14 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late String antecedentsChirurgicauxString;
   late List<String> antecedentsChirurgicaux = [];
   late String signeFonctionnelString;
-  late List<String> signeFonctionnel = [];
+  late List<String> signeFonctionnelList = [];
+  late List<dynamic> signeFonctionnel = [];
   late String examenCliniqueString;
-  late List<String> examenClinique = [];
+  late List<String> examenCliniqueList = [];
+  late List<dynamic> examenClinique = [];
   late String examenBiologiqueString;
-  late List<String> examenBiologique = [];
+  late List<dynamic> examenBiologique = [];
+  late List<String> examenBiologiqueList = [];
   late DateTime signeFonctionnelDate = DateTime.now();
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
@@ -228,9 +231,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (signeFonctionnel.isNotEmpty)
+                      if (signeFonctionnelList.isNotEmpty)
                         BuildListInfo(
-                          listInfo: signeFonctionnel,
+                          listInfo: signeFonctionnelList,
                         ),
                       SizedBox(
                         child: CustomTextForm(
@@ -249,7 +252,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           setState(() {
                             if (signeFonctionnelString != '') {
                               FocusScope.of(context).requestFocus(FocusNode());
-                              signeFonctionnel.add(signeFonctionnelString);
+                              signeFonctionnelList.add(signeFonctionnelString);
                               signeFonctionnelString = '';
                             }
                           });
@@ -265,9 +268,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (examenClinique.isNotEmpty)
+                      if (examenCliniqueList.isNotEmpty)
                         BuildListInfo(
-                          listInfo: examenClinique,
+                          listInfo: examenCliniqueList,
                         ),
                       SizedBox(
                         child: CustomTextForm(
@@ -286,7 +289,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           setState(() {
                             if (examenCliniqueString != '') {
                               FocusScope.of(context).requestFocus(FocusNode());
-                              examenClinique.add(examenCliniqueString);
+                              examenCliniqueList.add(examenCliniqueString);
                               examenCliniqueString = '';
                             }
                           });
@@ -302,9 +305,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           });
                         },
                       ),
-                      if (examenBiologique.isNotEmpty)
+                      if (examenBiologiqueList.isNotEmpty)
                         BuildListInfo(
-                          listInfo: examenBiologique,
+                          listInfo: examenBiologiqueList,
                         ),
                       SizedBox(
                         child: CustomTextForm(
@@ -323,7 +326,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           setState(() {
                             if (examenBiologiqueString != '') {
                               FocusScope.of(context).requestFocus(FocusNode());
-                              examenBiologique.add(examenBiologiqueString);
+                              examenBiologiqueList.add(examenBiologiqueString);
                               examenBiologiqueString = '';
                             }
                           });
@@ -447,6 +450,18 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         press: () {
                           FocusScope.of(context).requestFocus(FocusNode());
                           if (_formKey.currentState!.validate()) {
+                            signeFonctionnel = [
+                              signeFonctionnelDate,
+                              signeFonctionnelList
+                            ];
+                            examenClinique = [
+                              examenCliniqueDate,
+                              examenCliniqueList
+                            ];
+                            examenBiologique = [
+                              examenBiologiqueDate,
+                              examenBiologiqueList
+                            ];
                             widget.onSaved(
                               nom: nom,
                               prenom: prenom,

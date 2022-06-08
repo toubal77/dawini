@@ -76,9 +76,9 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               required int age,
               required List<String> antecedentsMedicaux,
               required List<String> antecedentsChirurgicaux,
-              required List<String> signeFonctionnel,
-              required List<String> examenClinique,
-              required List<String> examenBiologique,
+              required List<dynamic> signeFonctionnel,
+              required List<dynamic> examenClinique,
+              required List<dynamic> examenBiologique,
             }) {
               nom = nom;
               prenom = prenom;
