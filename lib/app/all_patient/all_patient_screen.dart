@@ -1,6 +1,7 @@
 import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/common_widgets/empty_content.dart';
+import 'package:dawini/constants/strings.dart';
 import 'package:dawini/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,40 +49,8 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
                   List<Patient> patients = snapshot.data!;
-                  print('rani baghi affichi');
                   return DataTable(
-                    columns: [
-                      const DataColumn(
-                        label: Text('Chambre',
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                      ),
-                      const DataColumn(
-                        label: const Text('Lit',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                      ),
-                      const DataColumn(
-                        label: const Text('Nom',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                      ),
-                      const DataColumn(
-                        label: const Text('Prenom',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                      ),
-                      const DataColumn(
-                        label: Text('Sixe',
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                      ),
-                      const DataColumn(
-                        label: const Text('Age',
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                      ),
-                    ],
+                    columns: columnTableList,
                     rows: patients
                         .map(
                           (player) => DataRow(

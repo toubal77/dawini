@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 const String localUserInfoKey = 'userInfo';
 const String wrongNameError = '';
 const String invalidPrenomError = 'Ce champ est obligatoire';
@@ -19,6 +21,32 @@ const Map<String, List<dynamic>> imagerieTypeMap = {
   'b': [],
   'c': [],
 };
+const List<DataColumn> columnTableList = [
+  DataColumn(
+    label: Text('Chambre',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  ),
+  DataColumn(
+    label: Text('Lit',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  ),
+  DataColumn(
+    label: Text('Nom',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  ),
+  DataColumn(
+    label: Text('Prenom',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  ),
+  DataColumn(
+    label: Text('Sixe',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  ),
+  DataColumn(
+    label: Text('Age',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  ),
+];
 const List<String> antecedentsMedicauxListName = [
   'Maladies cardiovasculaires',
   'Cancers',
