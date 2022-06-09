@@ -92,7 +92,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               required String? nom,
               required String? prenom,
               required int? age,
-              required int? sixe,
+              required int sixe,
               required List<String>? antecedentsMedicaux,
               required List<String>? antecedentsChirurgicaux,
               required Map? signeFonctionnel,

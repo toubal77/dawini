@@ -26,7 +26,7 @@ class NewPatientForm extends StatefulWidget {
     required String? nom,
     required String? prenom,
     required int? age,
-    required int? sixe,
+    required int sixe,
     required List<String>? antecedentsMedicaux,
     required List<String>? antecedentsChirurgicaux,
     required Map? signeFonctionnel,
@@ -44,7 +44,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late String? nom = '';
   late String? prenom = '';
   late int? age = 0;
-  late int? sixe = 0;
+  late int sixe = 0;
   late bool hommeBool = false;
   late bool femmeBool = false;
   late String antecedentsMedicauxString;
@@ -527,7 +527,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 nom: nom ?? nom,
                                 prenom: prenom ?? prenom,
                                 age: age ?? age,
-                                sixe: sixe ?? sixe,
+                                sixe: sixe,
                                 antecedentsMedicaux:
                                     antecedentsMedicaux ?? antecedentsMedicaux,
                                 antecedentsChirurgicaux:

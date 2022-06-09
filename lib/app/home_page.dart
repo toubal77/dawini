@@ -1,3 +1,4 @@
+import 'package:dawini/app/all_patient/all_patient_screen.dart';
 import 'package:dawini/app/new_patient/new_patient_screen.dart';
 import 'package:dawini/common_widgets/custom_elevated_button.dart';
 import 'package:dawini/common_widgets/size_config.dart';
@@ -78,7 +79,17 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) {
+                          return const AllPatientScreen();
+                        },
+                      ),
+                    );
+                  },
                   minHeight: 35,
                   minWidth: 200,
                 ),
