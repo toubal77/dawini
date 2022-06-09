@@ -29,6 +29,7 @@ class _BuildListInfoState extends State<BuildListInfo> {
                     text: '- ${widget.listInfo![index]} ...',
                     style: DefaultTextStyle.of(context).style,
                   ),
+                  maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
