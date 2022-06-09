@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/image_to_text.dart';
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
+import 'package:dawini/app/new_patient/widgets/build_imagerie_list.dart';
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_title.dart';
 import 'package:dawini/app/new_patient/widgets/build_title_info.dart';
@@ -35,7 +36,7 @@ class NewPatientForm extends StatefulWidget {
     required Map? signeFonctionnel,
     required Map? examenClinique,
     required Map? examenBiologique,
-    required List<Map>? imagerieList,
+    required List<dynamic>? imagerieList,
   }) onSaved;
   final Patient? patient;
   @override
@@ -72,7 +73,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
-  late List<Map>? imagerieList = [];
+  late List<dynamic>? imagerieList = [];
   late List<dynamic>? imagerie = [];
   late String imagerieString;
   late String typeImagerie;
@@ -107,7 +108,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
         examenBiologiqueDate = examenBiologique!['date'].toDate();
         examenBiologiqueList = examenBiologique!['list'];
       }
-      // imagerieList = widget.patient!.imagerie;
+      imagerieList = widget.patient!.imagerie;
     }
     super.initState();
   }
@@ -408,6 +409,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
                         child: const BuildButtomInfo(title: 'ENVOYER'),
                       ),
                       const BuildTitleInfo(text: 'Imagerie:'),
+                      if (imagerieList!.isNotEmpty)
+                        BuildImagerieList(imagerie: imagerieList),
                       CustomDropDown(
                         fillColor: Colors.white70,
                         title: 'Type',

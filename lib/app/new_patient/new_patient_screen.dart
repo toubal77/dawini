@@ -103,7 +103,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               required Map? signeFonctionnel,
               required Map? examenClinique,
               required Map? examenBiologique,
-              required List<Map>? imagerieList,
+              required List<dynamic>? imagerieList,
             }) {
               nom = nom;
               prenom = prenom;
