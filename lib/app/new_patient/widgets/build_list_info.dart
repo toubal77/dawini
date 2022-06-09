@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class BuildListInfo extends StatefulWidget {
-  late List<String>? listInfo;
+  late List<dynamic>? listInfo;
 
   BuildListInfo({
     Key? key,

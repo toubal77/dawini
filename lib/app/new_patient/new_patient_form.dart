@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/image_to_text.dart';
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
@@ -20,27 +21,30 @@ import 'package:fluttertoast/fluttertoast.dart';
 class NewPatientForm extends StatefulWidget {
   const NewPatientForm({
     Key? key,
+    required this.patient,
     required this.onSaved,
   }) : super(key: key);
   final void Function({
+    required String id,
     required String? nom,
     required String? prenom,
     required int? age,
     required int sixe,
-    required List<String>? antecedentsMedicaux,
-    required List<String>? antecedentsChirurgicaux,
+    required List<dynamic>? antecedentsMedicaux,
+    required List<dynamic>? antecedentsChirurgicaux,
     required Map? signeFonctionnel,
     required Map? examenClinique,
     required Map? examenBiologique,
     required List<Map>? imagerieList,
   }) onSaved;
-
+  final Patient? patient;
   @override
   State<NewPatientForm> createState() => _NewPatientFormState();
 }
 
 class _NewPatientFormState extends State<NewPatientForm> {
   late final _formKey = GlobalKey<FormState>();
+  late String id = '';
   late String? nom = '';
   late String? prenom = '';
   late int? age = 0;
@@ -48,30 +52,65 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late bool hommeBool = false;
   late bool femmeBool = false;
   late String antecedentsMedicauxString;
-  late List<String>? antecedentsMedicaux = [];
+  late List<dynamic>? antecedentsMedicaux = [];
   late List<String> antecedentsMedicauxListNameKey =
       antecedentsMedicauxListName;
   late Map<String, List<String>> antecedentsMedicauxList =
       antecedentsMedicauxMap;
   late String antecedentsChirurgicauxString;
-  late List<String>? antecedentsChirurgicaux = [];
+  late List<dynamic>? antecedentsChirurgicaux = [];
   late String signeFonctionnelString;
-  late List<String>? signeFonctionnelList = [];
+  late List<dynamic>? signeFonctionnelList = [];
   late Map? signeFonctionnel = {};
   late String examenCliniqueString;
-  late List<String>? examenCliniqueList = [];
+  late List<dynamic>? examenCliniqueList = [];
   late Map? examenClinique = {};
   late String examenBiologiqueString;
   late Map? examenBiologique = {};
-  late List<String>? examenBiologiqueList = [];
+  late List<dynamic>? examenBiologiqueList = [];
   late DateTime signeFonctionnelDate = DateTime.now();
   late DateTime examenCliniqueDate = DateTime.now();
   late DateTime examenBiologiqueDate = DateTime.now();
   late DateTime imagerieDate = DateTime.now();
   late List<Map>? imagerieList = [];
-  late List<String>? imagerie = [];
+  late List<dynamic>? imagerie = [];
   late String imagerieString;
   late String typeImagerie;
+
+  @override
+  void initState() {
+    if (widget.patient != null) {
+      id = widget.patient!.id;
+      nom = widget.patient!.nom;
+      prenom = widget.patient!.prenom;
+      age = widget.patient!.age;
+      sixe = widget.patient!.sixe;
+      if (sixe == 2) {
+        hommeBool = true;
+      } else if (sixe == 1) {
+        femmeBool = true;
+      }
+      antecedentsMedicaux = widget.patient!.antecedentsMedicaux;
+      antecedentsChirurgicaux = widget.patient!.antecedentsChirurgicaux;
+      signeFonctionnel = widget.patient!.signeFonctionnel;
+      if (signeFonctionnel!.isNotEmpty) {
+        signeFonctionnelDate = signeFonctionnel!['date'].toDate();
+        signeFonctionnelList = signeFonctionnel!['list'];
+      }
+      examenClinique = widget.patient!.examenClinique;
+      if (examenClinique!.isNotEmpty) {
+        examenCliniqueDate = examenClinique!['date'].toDate();
+        examenCliniqueList = examenClinique!['list'];
+      }
+      examenBiologique = widget.patient!.examenBiologique;
+      if (examenBiologique!.isNotEmpty) {
+        examenBiologiqueDate = examenBiologique!['date'].toDate();
+        examenBiologiqueList = examenBiologique!['list'];
+      }
+      // imagerieList = widget.patient!.imagerie;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +137,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       SizedBox(
                         child: CustomTextForm(
                           title: 'Nom:',
+                          initialValue: nom,
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
                             nom = value;
@@ -117,6 +157,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       SizedBox(
                         child: CustomTextForm(
                           title: 'Prenom:',
+                          initialValue: prenom,
                           textInputAction: TextInputAction.done,
                           onChanged: (var value) {
                             prenom = value;
@@ -136,6 +177,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                       SizedBox(
                         child: CustomTextForm(
                           title: 'Age:',
+                          initialValue: age.toString(),
                           textInputAction: TextInputAction.done,
                           textInputType: TextInputType.number,
                           onChanged: (var value) {
@@ -524,6 +566,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 examenCliniqueList!.isNotEmpty ||
                                 imagerieList!.isNotEmpty) {
                               widget.onSaved(
+                                id: id,
                                 nom: nom ?? nom,
                                 prenom: prenom ?? prenom,
                                 age: age ?? age,

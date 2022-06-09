@@ -12,10 +12,18 @@ class NewPatientBloc {
 
   Future<void> addNewPatient(Patient patient) async {
     const Uuid uuid = Uuid();
-    await database.setData(
-      path: APIPath.newPatientDocument(uuid.v4()),
-      data: patient.toMap(),
-      merge: false,
-    );
+    if (patient.id == '') {
+      await database.setData(
+        path: APIPath.newPatientDocument(uuid.v4()),
+        data: patient.toMap(),
+        merge: false,
+      );
+    } else {
+      await database.setData(
+        path: APIPath.newPatientDocument(patient.id),
+        data: patient.toMap(),
+        merge: false,
+      );
+    }
   }
 }

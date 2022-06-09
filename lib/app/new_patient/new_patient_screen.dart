@@ -9,8 +9,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class NewPatientScreen extends StatefulWidget {
+  final Patient? patient;
   const NewPatientScreen({
     Key? key,
+    this.patient,
   }) : super(key: key);
 
   @override
@@ -39,6 +41,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
     bloc = NewPatientBloc(
       database: database,
     );
+
     super.initState();
   }
 
@@ -88,13 +91,15 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
         controller: _pageController,
         children: <Widget>[
           NewPatientForm(
+            patient: widget.patient,
             onSaved: ({
               required String? nom,
+              required String id,
               required String? prenom,
               required int? age,
               required int sixe,
-              required List<String>? antecedentsMedicaux,
-              required List<String>? antecedentsChirurgicaux,
+              required List<dynamic>? antecedentsMedicaux,
+              required List<dynamic>? antecedentsChirurgicaux,
               required Map? signeFonctionnel,
               required Map? examenClinique,
               required Map? examenBiologique,
@@ -110,11 +115,12 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               sixe = sixe;
               examenBiologique = examenBiologique;
               imagerieList = imagerieList;
+              id = id;
               Patient patient = Patient(
                 age: age,
                 antecedentsChirurgicaux: antecedentsChirurgicaux,
                 room: 'room',
-                id: '',
+                id: id,
                 bed: 'bed',
                 sixe: sixe,
                 examenBiologique: examenBiologique,

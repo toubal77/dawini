@@ -1,5 +1,7 @@
 import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
+import 'package:dawini/app/new_patient/new_patient_form.dart';
+import 'package:dawini/app/new_patient/new_patient_screen.dart';
 import 'package:dawini/common_widgets/empty_content.dart';
 import 'package:dawini/constants/strings.dart';
 import 'package:dawini/services/database.dart';
@@ -54,6 +56,15 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
                     rows: patients
                         .map(
                           (player) => DataRow(
+                            onLongPress: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return NewPatientScreen(patient: player);
+                                  },
+                                ),
+                              );
+                            },
                             cells: [
                               DataCell(Text(player.room!)),
                               DataCell(Text(player.bed!)),
