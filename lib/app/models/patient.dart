@@ -4,6 +4,7 @@ class Patient {
     required this.nom,
     required this.prenom,
     required this.age,
+    required this.sixe,
     required this.room,
     required this.bed,
     required this.antecedentsMedicaux,
@@ -20,6 +21,7 @@ class Patient {
   final String? nom;
   final String? prenom;
   final int? age;
+  final int? sixe;
   final List<String>? antecedentsMedicaux;
   final List<String>? antecedentsChirurgicaux;
   final Map? signeFonctionnel;
@@ -34,6 +36,7 @@ class Patient {
     final String? nom = data['nom'] as String?;
     final String? prenom = data['prenom'] as String?;
     final int? age = data['age'] as int?;
+    final int? sixe = data['sixe'] as int?;
     final List<String>? antecedentsMedicaux =
         data['antecedentsMedicaux'] as List<String>?;
     final List<String>? antecedentsChirurgicaux =
@@ -51,6 +54,7 @@ class Patient {
       antecedentsMedicaux: antecedentsMedicaux,
       bed: bed,
       nom: nom,
+      sixe: sixe,
       examenClinique: examenClinique,
       imagerie: imagerie,
       examenBiologique: examenBiologique,
@@ -74,6 +78,7 @@ class Patient {
       "antecedentsChirurgicaux": antecedentsChirurgicaux,
       "antecedentsMedicaux": antecedentsMedicaux,
       "bed": bed,
+      "sixe": sixe,
       "nom": nom,
       "examenClinique": examenClinique,
       "imagerie": imagerie,

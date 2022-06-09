@@ -26,6 +26,7 @@ class NewPatientForm extends StatefulWidget {
     required String? nom,
     required String? prenom,
     required int? age,
+    required int? sixe,
     required List<String>? antecedentsMedicaux,
     required List<String>? antecedentsChirurgicaux,
     required Map? signeFonctionnel,
@@ -43,6 +44,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late String? nom = '';
   late String? prenom = '';
   late int? age = 0;
+  late int? sixe = 0;
+  late bool hommeBool = false;
+  late bool femmeBool = false;
   late String antecedentsMedicauxString;
   late List<String>? antecedentsMedicaux = [];
   late List<String> antecedentsMedicauxListNameKey =
@@ -148,6 +152,32 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             return null;
                           },
                         ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const BuildTitleInfo(text: 'Sixe:'),
+                      CheckboxListTile(
+                        title: const Text('Homme'),
+                        value: hommeBool,
+                        onChanged: (value) {
+                          setState(() {
+                            hommeBool = value!;
+                            femmeBool = false;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      CheckboxListTile(
+                        title: const Text('Femme'),
+                        value: femmeBool,
+                        onChanged: (value) {
+                          setState(() {
+                            femmeBool = value!;
+                            hommeBool = false;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
                       ),
                       const SizedBox(
                         height: 15,
@@ -477,6 +507,12 @@ class _NewPatientFormState extends State<NewPatientForm> {
                               examenBiologique = {};
                             }
                             if (imagerieList!.isEmpty) {}
+                            if (hommeBool) {
+                              sixe = 2;
+                            }
+                            if (femmeBool) {
+                              sixe = 1;
+                            }
 
                             if (nom != '' ||
                                 prenom != '' ||
@@ -491,6 +527,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 nom: nom ?? nom,
                                 prenom: prenom ?? prenom,
                                 age: age ?? age,
+                                sixe: sixe ?? sixe,
                                 antecedentsMedicaux:
                                     antecedentsMedicaux ?? antecedentsMedicaux,
                                 antecedentsChirurgicaux:
