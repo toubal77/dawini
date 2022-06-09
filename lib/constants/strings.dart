@@ -23,11 +23,7 @@ const Map<String, List<dynamic>> imagerieTypeMap = {
 };
 const List<DataColumn> columnTableList = [
   DataColumn(
-    label: Text('Chambre',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-  ),
-  DataColumn(
-    label: Text('Lit',
+    label: Text('Chambre / Lit',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
   ),
   DataColumn(

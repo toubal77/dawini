@@ -66,8 +66,8 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
                               );
                             },
                             cells: [
-                              DataCell(Text(player.room!)),
-                              DataCell(Text(player.bed!)),
+                              DataCell(
+                                  Text(player.room! + ' / ' + player.bed!)),
                               DataCell(Text(player.nom!)),
                               DataCell(Text(player.prenom!)),
                               DataCell(player.sixe != 0
