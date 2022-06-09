@@ -81,6 +81,7 @@ class _BuildImagerieListState extends State<BuildImagerieList> {
                             '     -${widget.imagerie![index]['imagerie'][i]} ',
                             style: DefaultTextStyle.of(context).style,
                             maxLines: 10,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       const SizedBox(height: 5),

@@ -1,3 +1,4 @@
+import 'package:dawini/common_widgets/size_config.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -15,6 +16,7 @@ class BuildListInfo extends StatefulWidget {
 class _BuildListInfoState extends State<BuildListInfo> {
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return ListView.builder(
       shrinkWrap: true,
       itemCount: widget.listInfo!.length,
@@ -22,13 +24,13 @@ class _BuildListInfoState extends State<BuildListInfo> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(
-                child: RichText(
-                  text: TextSpan(
-                    text: '- ${widget.listInfo![index]} ...',
-                    style: DefaultTextStyle.of(context).style,
-                  ),
+              SizedBox(
+                width: SizeConfig.screenWidth * 0.6,
+                child: Text(
+                  '- ${widget.listInfo![index]}',
+                  style: DefaultTextStyle.of(context).style,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
