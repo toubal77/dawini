@@ -1,3 +1,4 @@
+import 'package:dawini/app/all_patient/add_consigne/add_consigne_bloc.dart';
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_form.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:dawini/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class AddConsigneScreen extends StatefulWidget {
@@ -22,13 +24,13 @@ class AddConsigneScreen extends StatefulWidget {
 class _AddConsigneScreenState extends State<AddConsigneScreen> {
   late final PageController _pageController;
 
-  late final NewPatientBloc bloc;
+  late final AddConsigneBloc bloc;
 
   @override
   void initState() {
     _pageController = PageController();
     final Database database = context.read<Database>();
-    bloc = NewPatientBloc(
+    bloc = AddConsigneBloc(
       database: database,
     );
 
@@ -47,13 +49,13 @@ class _AddConsigneScreenState extends State<AddConsigneScreen> {
 
   Future<void> sendInfo(Patient patient) async {
     try {
-      // bloc.addNewPatient(patient).then((value) {
-      //   Fluttertoast.showToast(
-      //     msg: 'Le patient est enregistre avec succès',
-      //     toastLength: Toast.LENGTH_LONG,
-      //   );
-      //   Navigator.of(context).pop();
-      //  });
+      bloc.addConsignePatient(patient).then((value) {
+        Fluttertoast.showToast(
+          msg: 'La consigne est enregistre avec succès',
+          toastLength: Toast.LENGTH_LONG,
+        );
+        Navigator.of(context).pop();
+      });
     } on Exception catch (e) {
       PlatformExceptionAlertDialog(exception: e).show(context);
     }
@@ -81,13 +83,29 @@ class _AddConsigneScreenState extends State<AddConsigneScreen> {
         controller: _pageController,
         children: <Widget>[
           AddConsigneForm(
-            patient: widget.patient,
+            patient: widget.patient!.consigne,
             onSaved: ({
               required List<dynamic>? consigneList,
             }) {
               consigneList = consigneList;
-
-              //    sendInfo(patient);
+              Patient patient = Patient(
+                age: widget.patient!.age,
+                antecedentsChirurgicaux:
+                    widget.patient!.antecedentsChirurgicaux,
+                room: widget.patient!.room,
+                id: widget.patient!.id,
+                bed: widget.patient!.bed,
+                sixe: widget.patient!.sixe,
+                examenBiologique: widget.patient!.examenBiologique,
+                examenClinique: widget.patient!.examenClinique,
+                antecedentsMedicaux: widget.patient!.antecedentsMedicaux,
+                imagerie: widget.patient!.imagerie,
+                nom: widget.patient!.nom,
+                prenom: widget.patient!.prenom,
+                signeFonctionnel: widget.patient!.signeFonctionnel,
+                consigne: consigneList,
+              );
+              sendInfo(patient);
             },
           ),
         ],

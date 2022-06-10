@@ -22,7 +22,7 @@ class AddConsigneForm extends StatefulWidget {
   final void Function({
     required List<dynamic>? consigneList,
   }) onSaved;
-  final Patient? patient;
+  final List<dynamic>? patient;
   @override
   State<AddConsigneForm> createState() => _AddConsigneFormState();
 }
@@ -35,7 +35,9 @@ class _AddConsigneFormState extends State<AddConsigneForm> {
   late List<dynamic>? consigneList = [];
   @override
   void initState() {
-    if (widget.patient != null) {}
+    if (widget.patient != null) {
+      consigneList = widget.patient!;
+    }
     super.initState();
   }
 

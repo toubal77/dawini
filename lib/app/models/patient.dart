@@ -13,6 +13,7 @@ class Patient {
     required this.examenClinique,
     required this.examenBiologique,
     required this.imagerie,
+    required this.consigne,
   });
 
   final String id;
@@ -28,6 +29,7 @@ class Patient {
   final Map? examenClinique;
   final Map? examenBiologique;
   final List<dynamic>? imagerie;
+  final List<dynamic>? consigne;
 
   factory Patient.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
@@ -45,6 +47,7 @@ class Patient {
     final Map? examenClinique = data['examenClinique'] as Map?;
     final Map? examenBiologique = data['examenBiologique'] as Map?;
     final List<dynamic>? imagerie = data['imagerie'] as List<dynamic>?;
+    final List<dynamic>? consigne = data['consigne'] as List<dynamic>?;
 
     return Patient(
       id: id,
@@ -60,6 +63,7 @@ class Patient {
       examenBiologique: examenBiologique,
       prenom: prenom,
       room: room,
+      consigne: consigne,
     );
   }
 
@@ -77,6 +81,7 @@ class Patient {
       "examenBiologique": examenBiologique,
       "prenom": prenom,
       "room": room,
+      'consigne': consigne,
     };
   }
 }

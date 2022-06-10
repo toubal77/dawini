@@ -121,6 +121,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
                 nom: nom,
                 prenom: prenom,
                 signeFonctionnel: signeFonctionnel,
+                consigne: [],
               );
               sendInfo(patient);
             },
