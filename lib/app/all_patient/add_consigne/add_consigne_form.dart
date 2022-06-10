@@ -1,14 +1,9 @@
-import 'dart:math';
-
 import 'package:dawini/app/all_patient/add_consigne/widgets/build_consigne_list.dart';
 import 'package:dawini/app/models/patient.dart';
-import 'package:dawini/app/new_patient/image_to_text.dart';
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
-import 'package:dawini/app/new_patient/widgets/build_imagerie_list.dart';
-import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
+
 import 'package:dawini/app/new_patient/widgets/build_title.dart';
-import 'package:dawini/app/new_patient/widgets/build_title_info.dart';
-import 'package:dawini/common_widgets/custom_drop_down.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,8 +12,6 @@ import 'package:dawini/app/new_patient/widgets/buttom_media.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/constants/app_colors.dart';
-import 'package:dawini/constants/strings.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class AddConsigneForm extends StatefulWidget {
   const AddConsigneForm({

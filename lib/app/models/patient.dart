@@ -62,13 +62,6 @@ class Patient {
       room: room,
     );
   }
-  // factory Patient.fromMap2(Map<String, dynamic> data, String documentId) {
-  //   final int type = data['type'] as int;
-  //   if (type == 0) {
-  //     return Restaurent.fromMap(data, documentId);
-  //   }
-  //   return Patient.fromMap(data, documentId);
-  // }
 
   Map<String, dynamic> toMap() {
     return {

@@ -1,13 +1,10 @@
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_form.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_bloc.dart';
-import 'package:dawini/app/new_patient/new_patient_form.dart';
-import 'package:dawini/app/new_patient/new_patient_screen.dart';
 import 'package:dawini/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/services/database.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class AddConsigneScreen extends StatefulWidget {

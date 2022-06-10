@@ -34,17 +34,6 @@ class _WilayaPickerState extends State<CustomDropDown> {
   @override
   void initState() {
     dropdownValue = widget.initialValue;
-    //! fix this, this is a temp fixs
-    // if (widget.options != null) {
-    //   options = widget.options!.toSet();
-    // } else {
-    //   // options = algeriaCities
-    //   //     .map((e) {
-    //   //       return "${e['wilaya_code']} - ${e['wilaya_name_ascii']}";
-    //   //     })
-    //   //     .toList()
-    //   //     .toSet();
-    // }
 
     super.initState();
   }
@@ -65,17 +54,6 @@ class _WilayaPickerState extends State<CustomDropDown> {
                     color: Colors.black,
                   ),
                 ),
-          //  BorderedText(
-          //     strokeColor: Colors.black,
-          //     strokeWidth: 3.0,
-          //     child: Text(
-          //       widget.title,
-          //       style: const TextStyle(
-          //         fontSize: 15,
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ),
         ),
         const SizedBox(height: 2),
         DropdownButtonFormField<String>(

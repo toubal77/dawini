@@ -24,15 +24,6 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
   late final PageController _pageController;
 
   late final NewPatientBloc bloc;
-  // late String nom;
-  // late String prenom;
-  // late int age;
-  // late List<String> antecedentsMedicaux;
-  // late List<String> antecedentsChirurgicaux;
-  // late List<dynamic> signeFonctionnel;
-  // late List<dynamic> examenClinique;
-  // late List<dynamic> examenBiologique;
-  // late List<List> imagerieList;
 
   @override
   void initState() {

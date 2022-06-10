@@ -1,7 +1,6 @@
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
 import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
-import 'package:dawini/app/new_patient/new_patient_form.dart';
 import 'package:dawini/app/new_patient/new_patient_screen.dart';
 import 'package:dawini/common_widgets/empty_content.dart';
 import 'package:dawini/constants/strings.dart';
