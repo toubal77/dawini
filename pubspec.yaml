@@ -46,7 +46,14 @@ dependencies:
   cloud_firestore: ^3.1.17
   google_ml_kit: ^0.11.0
   fluttertoast: ^8.0.9
+  flutter_launcher_icons: ^0.9.3
+  rename: ^2.0.1
   
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon_app.png"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
