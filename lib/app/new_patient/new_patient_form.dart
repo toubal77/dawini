@@ -131,7 +131,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BuildTitle(),
+                      const BuildTitle(title: 'Ajoute un nouveau patient'),
                       const SizedBox(
                         height: 15,
                       ),

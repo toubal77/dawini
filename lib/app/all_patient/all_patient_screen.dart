@@ -1,3 +1,4 @@
+import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
 import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_form.dart';
@@ -66,8 +67,21 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
                               );
                             },
                             cells: [
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return AddConsigneScreen(
+                                            patient: player);
+                                      },
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.add),
+                              )),
                               DataCell(
-                                  Text(player.room! + ' / ' + player.bed!)),
+                                  Text('${player.room!} / ${player.bed!}')),
                               DataCell(Text(player.nom!)),
                               DataCell(Text(player.prenom!)),
                               DataCell(player.sixe != 0
