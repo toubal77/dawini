@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
+import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/image_to_text.dart';
+import 'package:dawini/app/new_patient/new_patient_bloc.dart';
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_imagerie_list.dart';
 import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
@@ -25,6 +27,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class NewPatientForm extends StatefulWidget {
   const NewPatientForm({
     Key? key,
+    required this.bloc,
     required this.patient,
     required this.onSaved,
   }) : super(key: key);
@@ -42,6 +45,7 @@ class NewPatientForm extends StatefulWidget {
     required Map? examenBiologique,
     required List<dynamic>? imagerieList,
   }) onSaved;
+  final NewPatientBloc bloc;
   final Patient? patient;
   @override
   State<NewPatientForm> createState() => _NewPatientFormState();
@@ -55,6 +59,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late String? room = 'room';
   late int? age = 0;
   late int sixe = 0;
+  late bool checkk = false;
   late bool hommeBool = false;
   late bool femmeBool = false;
   late String antecedentsMedicauxString;
@@ -137,7 +142,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const BuildTitle(title: 'Ajoute un nouveau patient'),
-                      if (widget.patient == null)
+                      if (widget.patient == null || checkk)
                         TextButton(
                           onPressed: () async {
                             try {
@@ -174,9 +179,57 @@ class _NewPatientFormState extends State<NewPatientForm> {
                           },
                           child: room == 'room'
                               ? const Text(
-                                  'Clique pour lui affecte une chambre et un lit')
+                                  'Clique pour lui affecte une chambre et un lit et valide le formulaire par la suite')
                               : Text(
                                   'Le patient est affecte chambre et lit: ${room!}'),
+                        ),
+                      if (widget.patient != null && !checkk)
+                        TextButton(
+                          onPressed: () async {
+                            if (widget.patient!.room != 'room') {
+                              widget.bloc.updatePatientRoom(widget.patient!);
+                              setState(() {
+                                checkk = true;
+                              });
+                            } else {
+                              try {
+                                final qrCode =
+                                    await FlutterBarcodeScanner.scanBarcode(
+                                  '#ff6666',
+                                  'Cancel',
+                                  true,
+                                  ScanMode.QR,
+                                );
+                                // ignore: avoid_print
+                                print('this is a String scaned :$qrCode');
+                                if (qrCode.startsWith('http//tbl-')) {
+                                  int length = qrCode.length;
+                                  qrCode.substring(10, length);
+
+                                  room = qrCode.substring(10, length);
+                                  setState(() {});
+                                } else {
+                                  Fluttertoast.showToast(
+                                    msg:
+                                        'CODE QR ne presente aucune donne valide',
+                                    toastLength: Toast.LENGTH_LONG,
+                                  );
+                                }
+                              } on PlatformAlertDialog {
+                                // ignore: avoid_print
+                                print(
+                                    'error scanQRcode: Failed to get platform version.');
+                              } catch (e) {
+                                // ignore: avoid_print
+                                print(e.toString());
+                              }
+                            }
+                          },
+                          child: !checkk && widget.patient!.room == 'room'
+                              ? const Text(
+                                  'Clique pour lui affecte une chambre / lit et valide le formulaire par la suite')
+                              : Text(
+                                  'Le patient est affecte chambre et lit: ${widget.patient!.room} clique pour lui enleve'),
                         ),
                       if (widget.patient != null)
                         TextButton(

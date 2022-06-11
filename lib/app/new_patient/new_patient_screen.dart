@@ -82,6 +82,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
         controller: _pageController,
         children: <Widget>[
           NewPatientForm(
+            bloc: bloc,
             patient: widget.patient,
             onSaved: ({
               required String? nom,
