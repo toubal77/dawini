@@ -1,5 +1,6 @@
 import 'package:dawini/app/all_patient/all_patient_screen.dart';
 import 'package:dawini/app/new_patient/new_patient_screen.dart';
+import 'package:dawini/app/scanne_patient/scanne_patient_screen.dart';
 import 'package:dawini/common_widgets/custom_elevated_button.dart';
 import 'package:dawini/common_widgets/size_config.dart';
 import 'package:dawini/constants/app_images.dart';
@@ -86,6 +87,40 @@ class HomePage extends StatelessWidget {
                         fullscreenDialog: true,
                         builder: (context) {
                           return const AllPatientScreen();
+                        },
+                      ),
+                    );
+                  },
+                  minHeight: 35,
+                  minWidth: 200,
+                ),
+                CustomElevatedButton(
+                  buttonText: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          "Scanner un patient",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        Icons.chevron_right,
+                        size: 30,
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) {
+                          return const ScannerPatientScreen();
                         },
                       ),
                     );

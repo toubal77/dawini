@@ -48,6 +48,8 @@ dependencies:
   fluttertoast: ^8.0.9
   flutter_launcher_icons: ^0.9.3
   rename: ^2.0.1
+  flutter_barcode_scanner: ^2.0.0
+  barcode_widget: ^2.0.2
   
 flutter_icons:
   android: true
