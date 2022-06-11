@@ -42,6 +42,7 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
         true,
         ScanMode.QR,
       );
+      // ignore: avoid_print
       print('this is a String scaned :$qrCode');
       if (qrCode.startsWith('http//tbl-')) {
         int length = qrCode.length;
@@ -51,6 +52,7 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
         if (search != '') {
           for (int i = 0; i < allPatients!.length; i++) {
             if (allPatients![i].room == search) {
+              // ignore: use_build_context_synchronously
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
@@ -72,8 +74,10 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
         );
       }
     } on PlatformAlertDialog {
+      // ignore: avoid_print
       print('error scanQRcode: Failed to get platform version.');
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
     }
   }

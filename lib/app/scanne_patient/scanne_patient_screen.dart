@@ -3,9 +3,7 @@ import 'package:dawini/app/all_patient/all_patient_screen.dart';
 
 import 'package:dawini/app/scanne_patient/widgets/build_button_qr.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
-import 'package:dawini/common_widgets/platform_alert_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScannerPatientScreen extends StatefulWidget {
@@ -18,16 +16,6 @@ class ScannerPatientScreen extends StatefulWidget {
 class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
   late String? qrCodeText = '';
   late bool createdQR = false;
-
-  // void createdQR() {
-  //   BarcodeWidget(
-  //     barcode: Barcode.qrCode(),
-  //     backgroundColor: Colors.white,
-  //     data: 'Ch-06',
-  //     width: 200,
-  //     height: 200,
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +82,7 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
               onTap: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return AllPatientScreen(
+                  return const AllPatientScreen(
                     scanneQR: true,
                   );
                 }));
