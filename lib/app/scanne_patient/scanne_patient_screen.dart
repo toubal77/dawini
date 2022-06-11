@@ -1,5 +1,5 @@
 import 'package:barcode_widget/barcode_widget.dart';
-import 'package:dawini/app/new_patient/widgets/build_buttom_info.dart';
+
 import 'package:dawini/app/scanne_patient/widgets/build_button_qr.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
 import 'package:dawini/common_widgets/platform_alert_dialog.dart';

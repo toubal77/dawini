@@ -1,5 +1,5 @@
 import 'package:dawini/app/all_patient/add_consigne/widgets/build_consigne_list.dart';
-import 'package:dawini/app/models/patient.dart';
+
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
 
 import 'package:dawini/app/new_patient/widgets/build_title.dart';
