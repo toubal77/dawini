@@ -3,13 +3,17 @@ import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_screen.dart';
 import 'package:dawini/common_widgets/empty_content.dart';
+import 'package:dawini/common_widgets/platform_alert_dialog.dart';
 import 'package:dawini/constants/strings.dart';
 import 'package:dawini/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class AllPatientScreen extends StatefulWidget {
-  const AllPatientScreen({Key? key}) : super(key: key);
+  final bool scanneQR;
+  const AllPatientScreen({Key? key, required this.scanneQR}) : super(key: key);
 
   @override
   State<AllPatientScreen> createState() => _AllPatientScreenState();
@@ -26,6 +30,30 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
     );
     allPatient = bloc.getAllPatients();
     super.initState();
+  }
+
+  Future<void> onQRViewCreated() async {
+    try {
+      final qrCode = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.QR,
+      );
+      print('this is a String scaned :$qrCode');
+      if (qrCode.startsWith('tbl-')) {
+        print('dgjo edgj  pdjg ${qrCode.substring(0, 4)}');
+      } else {
+        Fluttertoast.showToast(
+          msg: 'CODE QR ne presente aucune donne valide',
+          toastLength: Toast.LENGTH_LONG,
+        );
+      }
+    } on PlatformAlertDialog {
+      print('error scanQRcode: Failed to get platform version.');
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -51,6 +79,9 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
                   List<Patient> patients = snapshot.data!;
+                  if (widget.scanneQR) {
+                    onQRViewCreated();
+                  }
                   return DataTable(
                     columns: columnTableList,
                     rows: patients

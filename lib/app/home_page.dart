@@ -86,7 +86,9 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(
                         fullscreenDialog: true,
                         builder: (context) {
-                          return const AllPatientScreen();
+                          return const AllPatientScreen(
+                            scanneQR: false,
+                          );
                         },
                       ),
                     );

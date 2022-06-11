@@ -1,4 +1,5 @@
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:dawini/app/all_patient/all_patient_screen.dart';
 
 import 'package:dawini/app/scanne_patient/widgets/build_button_qr.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
@@ -17,25 +18,6 @@ class ScannerPatientScreen extends StatefulWidget {
 class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
   late String? qrCodeText = '';
   late bool createdQR = false;
-  Future<void> onQRViewCreated() async {
-    try {
-      final qrCode = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666',
-        'Cancel',
-        true,
-        ScanMode.QR,
-      );
-      // print('this is a String scaned :$qrCode');
-      // if (qrCode.startsWith('http') == false &&
-      //     qrCode.startsWith('https') == false &&
-      //     qrCode.startsWith('www') == false &&
-      //     qrCode != '-1') {}
-    } on PlatformAlertDialog {
-      print('error scanQRcode: Failed to get platform version.');
-    } catch (e) {
-      print(e.toString());
-    }
-  }
 
   // void createdQR() {
   //   BarcodeWidget(
@@ -107,7 +89,14 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
             ),
           if (!createdQR)
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return AllPatientScreen(
+                    scanneQR: true,
+                  );
+                }));
+              },
               child: const BuildButtonQR(title: 'SCANNE UN CODE QR'),
             ),
         ],
