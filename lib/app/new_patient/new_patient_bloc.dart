@@ -27,11 +27,11 @@ class NewPatientBloc {
     }
   }
 
-  Future<void> updatePatientRoom(Patient patient) async {
+  Future<void> updatePatientRoom(Patient patient, String? room) async {
     await database.updateData(
       path: APIPath.newPatientDocument(patient.id),
       data: {
-        'room': 'room',
+        'room': room,
       },
     );
   }

@@ -35,7 +35,7 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
             BarcodeWidget(
               barcode: Barcode.qrCode(),
               backgroundColor: Colors.white,
-              data: 'http//tbl-${qrCodeText!}',
+              data: qrCodeText!,
               width: 250.w,
               height: 250.h,
             ),
@@ -53,7 +53,7 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
               child: CustomTextForm(
                 title: 'Vuellez saisir la chambre et le lit a cree:',
                 textInputAction: TextInputAction.done,
-                hintText: 'Par exemple: 237-02 / / 237',
+                hintText: 'Par exemple: ch237',
                 onChanged: (var value) {
                   qrCodeText = value;
                 },

@@ -142,7 +142,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const BuildTitle(title: 'Ajoute un nouveau patient'),
-                      if (widget.patient == null || checkk)
+                      if (widget.patient == null)
                         TextButton(
                           onPressed: () async {
                             try {
@@ -155,11 +155,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                               );
                               // ignore: avoid_print
                               print('this is a String scaned :$qrCode');
-                              if (qrCode.startsWith('http//tbl-')) {
-                                int length = qrCode.length;
-                                qrCode.substring(10, length);
+                              if (qrCode.startsWith('ch')) {
+                                room = qrCode;
 
-                                room = qrCode.substring(10, length);
                                 setState(() {});
                               } else {
                                 Fluttertoast.showToast(
@@ -183,11 +181,12 @@ class _NewPatientFormState extends State<NewPatientForm> {
                               : Text(
                                   'Le patient est affecte chambre et lit: ${room!}'),
                         ),
-                      if (widget.patient != null && !checkk)
+                      if (widget.patient != null)
                         TextButton(
                           onPressed: () async {
-                            if (widget.patient!.room != 'room') {
-                              widget.bloc.updatePatientRoom(widget.patient!);
+                            if (widget.patient!.room != 'room' && !checkk) {
+                              widget.bloc
+                                  .updatePatientRoom(widget.patient!, 'room');
                               setState(() {
                                 checkk = true;
                               });
@@ -202,12 +201,13 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 );
                                 // ignore: avoid_print
                                 print('this is a String scaned :$qrCode');
-                                if (qrCode.startsWith('http//tbl-')) {
-                                  int length = qrCode.length;
-                                  qrCode.substring(10, length);
+                                if (qrCode.startsWith('ch')) {
+                                  room = qrCode;
+                                  widget.bloc
+                                      .updatePatientRoom(widget.patient!, room);
 
-                                  room = qrCode.substring(10, length);
                                   setState(() {});
+                                  checkk = false;
                                 } else {
                                   Fluttertoast.showToast(
                                     msg:
@@ -226,10 +226,11 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             }
                           },
                           child: !checkk && widget.patient!.room == 'room'
-                              ? const Text(
-                                  'Clique pour lui affecte une chambre / lit et valide le formulaire par la suite')
+                              ? Text(room == 'room'
+                                  ? 'Clique pour lui affecte une chambre / lit'
+                                  : 'Le patient est affecte chambre et lit: $room clique pour lui enleve')
                               : Text(
-                                  'Le patient est affecte chambre et lit: ${widget.patient!.room} clique pour lui enleve'),
+                                  'Le patient est affecte chambre et lit: ${widget.patient!.room!} clique pour lui enleve'),
                         ),
                       if (widget.patient != null)
                         TextButton(

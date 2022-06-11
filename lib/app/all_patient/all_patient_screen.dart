@@ -34,7 +34,7 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
     super.initState();
   }
 
-  Future<void> onQRViewCreated() async {
+  Future<void> onQRViewCreated(List<Patient> patients) async {
     try {
       final qrCode = await FlutterBarcodeScanner.scanBarcode(
         '#ff6666',
@@ -44,20 +44,20 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
       );
       // ignore: avoid_print
       print('this is a String scaned :$qrCode');
-      if (qrCode.startsWith('http//tbl-')) {
+      if (qrCode.startsWith('ch')) {
         int length = qrCode.length;
-        qrCode.substring(10, length);
+        qrCode.substring(2, length);
         bool check = false;
-        search = qrCode.substring(10, length);
+        search = qrCode;
         if (search != '') {
-          for (int i = 0; i < allPatients!.length; i++) {
-            if (allPatients![i].room == search) {
+          for (int i = 0; i < patients.length; i++) {
+            if (patients[i].room == search) {
               check = true;
               // ignore: use_build_context_synchronously
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return NewPatientScreen(patient: allPatients![i]);
+                    return NewPatientScreen(patient: patients[i]);
                   },
                 ),
               );
@@ -110,7 +110,7 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
                   List<Patient> patients = snapshot.data!;
                   allPatients = patients;
                   if (widget.scanneQR) {
-                    onQRViewCreated();
+                    onQRViewCreated(patients);
                   }
 
                   return DataTable(
