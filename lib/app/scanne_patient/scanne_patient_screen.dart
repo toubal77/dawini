@@ -47,7 +47,7 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
             BarcodeWidget(
               barcode: Barcode.qrCode(),
               backgroundColor: Colors.white,
-              data: 'tbl-${qrCodeText!}',
+              data: 'http//tbl-${qrCodeText!}',
               width: 250.w,
               height: 250.h,
             ),

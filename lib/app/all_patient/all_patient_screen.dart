@@ -22,6 +22,8 @@ class AllPatientScreen extends StatefulWidget {
 class _AllPatientScreenState extends State<AllPatientScreen> {
   late final AllPatientsBloc bloc;
   late Stream<List<Patient>?> allPatient;
+  late List<Patient>? allPatients;
+  late String search = '';
   @override
   void initState() {
     final Database database = context.read<Database>();
@@ -41,8 +43,28 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
         ScanMode.QR,
       );
       print('this is a String scaned :$qrCode');
-      if (qrCode.startsWith('tbl-')) {
-        print('dgjo edgj  pdjg ${qrCode.substring(0, 4)}');
+      if (qrCode.startsWith('http//tbl-')) {
+        int length = qrCode.length;
+        qrCode.substring(10, length);
+
+        search = qrCode.substring(10, length);
+        if (search != '') {
+          for (int i = 0; i < allPatients!.length; i++) {
+            if (allPatients![i].room == search) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return NewPatientScreen(patient: allPatients![i]);
+                  },
+                ),
+              );
+            }
+          }
+          Fluttertoast.showToast(
+            msg: 'Le lit ou la chambre est vide',
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
       } else {
         Fluttertoast.showToast(
           msg: 'CODE QR ne presente aucune donne valide',
@@ -79,9 +101,11 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
                   List<Patient> patients = snapshot.data!;
+                  allPatients = patients;
                   if (widget.scanneQR) {
                     onQRViewCreated();
                   }
+
                   return DataTable(
                     columns: columnTableList,
                     rows: patients
