@@ -112,7 +112,6 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
                 antecedentsChirurgicaux: antecedentsChirurgicaux,
                 room: 'room',
                 id: id,
-                bed: 'bed',
                 sixe: sixe,
                 examenBiologique: examenBiologique,
                 examenClinique: examenClinique,

@@ -6,7 +6,6 @@ class Patient {
     required this.age,
     required this.sixe,
     required this.room,
-    required this.bed,
     required this.antecedentsMedicaux,
     required this.antecedentsChirurgicaux,
     required this.signeFonctionnel,
@@ -18,7 +17,6 @@ class Patient {
 
   final String id;
   final String? room;
-  final String? bed;
   final String? nom;
   final String? prenom;
   final int? age;
@@ -34,7 +32,6 @@ class Patient {
   factory Patient.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
     final String? room = data['room'] as String?;
-    final String? bed = data['bed'] as String?;
     final String? nom = data['nom'] as String?;
     final String? prenom = data['prenom'] as String?;
     final int? age = data['age'] as int?;
@@ -55,7 +52,6 @@ class Patient {
       signeFonctionnel: signeFonctionnel,
       antecedentsChirurgicaux: antecedentsChirurgicaux,
       antecedentsMedicaux: antecedentsMedicaux,
-      bed: bed,
       nom: nom,
       sixe: sixe,
       examenClinique: examenClinique,
@@ -73,7 +69,6 @@ class Patient {
       "signeFonctionnel": signeFonctionnel,
       "antecedentsChirurgicaux": antecedentsChirurgicaux,
       "antecedentsMedicaux": antecedentsMedicaux,
-      "bed": bed,
       "sixe": sixe,
       "nom": nom,
       "examenClinique": examenClinique,

@@ -79,8 +79,7 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
                                 },
                                 icon: const Icon(Icons.add),
                               )),
-                              DataCell(
-                                  Text('${player.room!} / ${player.bed!}')),
+                              DataCell(Text(player.room!)),
                               DataCell(Text(player.nom!)),
                               DataCell(Text(player.prenom!)),
                               DataCell(player.sixe != 0

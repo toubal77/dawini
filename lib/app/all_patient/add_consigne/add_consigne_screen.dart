@@ -94,7 +94,6 @@ class _AddConsigneScreenState extends State<AddConsigneScreen> {
                     widget.patient!.antecedentsChirurgicaux,
                 room: widget.patient!.room,
                 id: widget.patient!.id,
-                bed: widget.patient!.bed,
                 sixe: widget.patient!.sixe,
                 examenBiologique: widget.patient!.examenBiologique,
                 examenClinique: widget.patient!.examenClinique,
