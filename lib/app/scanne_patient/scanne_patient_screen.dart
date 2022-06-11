@@ -77,9 +77,11 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
           if (!createdQR)
             GestureDetector(
               onTap: () {
-                setState(() {
-                  createdQR = true;
-                });
+                if (qrCodeText != '') {
+                  setState(() {
+                    createdQR = true;
+                  });
+                }
               },
               child: const BuildButtonQR(title: 'GENERE UN CODE QR'),
             ),
