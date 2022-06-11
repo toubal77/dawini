@@ -98,6 +98,18 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
             Icons.arrow_back,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: ((context) {
+                return const NewPatientScreen();
+              })));
+            },
+            icon: const Icon(
+              Icons.add,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
