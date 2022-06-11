@@ -47,11 +47,12 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
       if (qrCode.startsWith('http//tbl-')) {
         int length = qrCode.length;
         qrCode.substring(10, length);
-
+        bool check = false;
         search = qrCode.substring(10, length);
         if (search != '') {
           for (int i = 0; i < allPatients!.length; i++) {
             if (allPatients![i].room == search) {
+              check = true;
               // ignore: use_build_context_synchronously
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -62,6 +63,8 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
               );
             }
           }
+        }
+        if (!check) {
           Fluttertoast.showToast(
             msg: 'Le lit ou la chambre est vide',
             toastLength: Toast.LENGTH_LONG,
