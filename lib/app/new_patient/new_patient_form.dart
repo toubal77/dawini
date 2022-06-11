@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/image_to_text.dart';
 import 'package:dawini/app/new_patient/widgets/build_date_info.dart';
@@ -132,6 +133,16 @@ class _NewPatientFormState extends State<NewPatientForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const BuildTitle(title: 'Ajoute un nouveau patient'),
+                      if (widget.patient != null)
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return AddConsigneScreen(patient: widget.patient);
+                            }));
+                          },
+                          child: const Text('Voir les consignes'),
+                        ),
                       const SizedBox(
                         height: 15,
                       ),
