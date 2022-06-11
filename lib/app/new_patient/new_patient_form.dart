@@ -205,9 +205,8 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                   room = qrCode;
                                   widget.bloc
                                       .updatePatientRoom(widget.patient!, room);
-
-                                  setState(() {});
                                   checkk = false;
+                                  setState(() {});
                                 } else {
                                   Fluttertoast.showToast(
                                     msg:
@@ -225,12 +224,13 @@ class _NewPatientFormState extends State<NewPatientForm> {
                               }
                             }
                           },
-                          child: !checkk && widget.patient!.room == 'room'
+                          child: checkk || widget.patient!.room == 'room'
                               ? Text(room == 'room'
                                   ? 'Clique pour lui affecte une chambre / lit'
                                   : 'Le patient est affecte chambre et lit: $room clique pour lui enleve')
-                              : Text(
-                                  'Le patient est affecte chambre et lit: ${widget.patient!.room!} clique pour lui enleve'),
+                              : Text(widget.patient!.room != 'room'
+                                  ? 'Le patient est affecte chambre et lit: ${widget.patient!.room!} clique pour lui enleve'
+                                  : 'Le patient est affecte chambre et lit: $room clique pour lui enleve'),
                         ),
                       if (widget.patient != null)
                         TextButton(
