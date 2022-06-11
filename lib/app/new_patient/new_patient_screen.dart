@@ -89,6 +89,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               required String? prenom,
               required int? age,
               required int sixe,
+              required String? room,
               required List<dynamic>? antecedentsMedicaux,
               required List<dynamic>? antecedentsChirurgicaux,
               required Map? signeFonctionnel,
@@ -107,10 +108,11 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               examenBiologique = examenBiologique;
               imagerieList = imagerieList;
               id = id;
+              room = room;
               Patient patient = Patient(
                 age: age,
                 antecedentsChirurgicaux: antecedentsChirurgicaux,
-                room: 'room',
+                room: room,
                 id: id,
                 sixe: sixe,
                 examenBiologique: examenBiologique,

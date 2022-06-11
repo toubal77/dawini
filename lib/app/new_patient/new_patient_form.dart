@@ -9,7 +9,9 @@ import 'package:dawini/app/new_patient/widgets/build_list_info.dart';
 import 'package:dawini/app/new_patient/widgets/build_title.dart';
 import 'package:dawini/app/new_patient/widgets/build_title_info.dart';
 import 'package:dawini/common_widgets/custom_drop_down.dart';
+import 'package:dawini/common_widgets/platform_alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:dawini/app/new_patient/widgets/build_buttom_info.dart';
@@ -32,6 +34,7 @@ class NewPatientForm extends StatefulWidget {
     required String? prenom,
     required int? age,
     required int sixe,
+    required String? room,
     required List<dynamic>? antecedentsMedicaux,
     required List<dynamic>? antecedentsChirurgicaux,
     required Map? signeFonctionnel,
@@ -49,6 +52,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late String id = '';
   late String? nom = '';
   late String? prenom = '';
+  late String? room = 'room';
   late int? age = 0;
   late int sixe = 0;
   late bool hommeBool = false;
@@ -133,6 +137,47 @@ class _NewPatientFormState extends State<NewPatientForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const BuildTitle(title: 'Ajoute un nouveau patient'),
+                      if (widget.patient == null)
+                        TextButton(
+                          onPressed: () async {
+                            try {
+                              final qrCode =
+                                  await FlutterBarcodeScanner.scanBarcode(
+                                '#ff6666',
+                                'Cancel',
+                                true,
+                                ScanMode.QR,
+                              );
+                              // ignore: avoid_print
+                              print('this is a String scaned :$qrCode');
+                              if (qrCode.startsWith('http//tbl-')) {
+                                int length = qrCode.length;
+                                qrCode.substring(10, length);
+
+                                room = qrCode.substring(10, length);
+                                setState(() {});
+                              } else {
+                                Fluttertoast.showToast(
+                                  msg:
+                                      'CODE QR ne presente aucune donne valide',
+                                  toastLength: Toast.LENGTH_LONG,
+                                );
+                              }
+                            } on PlatformAlertDialog {
+                              // ignore: avoid_print
+                              print(
+                                  'error scanQRcode: Failed to get platform version.');
+                            } catch (e) {
+                              // ignore: avoid_print
+                              print(e.toString());
+                            }
+                          },
+                          child: room == 'room'
+                              ? const Text(
+                                  'Clique pour lui affecte une chambre et un lit')
+                              : Text(
+                                  'Le patient est affecte chambre et lit: ${room!}'),
+                        ),
                       if (widget.patient != null)
                         TextButton(
                           onPressed: () {
@@ -585,6 +630,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 prenom: prenom ?? prenom,
                                 age: age ?? age,
                                 sixe: sixe,
+                                room: room,
                                 antecedentsMedicaux:
                                     antecedentsMedicaux ?? antecedentsMedicaux,
                                 antecedentsChirurgicaux:
