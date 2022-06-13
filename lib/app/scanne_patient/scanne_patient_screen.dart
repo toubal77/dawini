@@ -3,6 +3,7 @@ import 'package:dawini/app/all_patient/all_patient_screen.dart';
 
 import 'package:dawini/app/scanne_patient/widgets/build_button_qr.dart';
 import 'package:dawini/common_widgets/custom_text_field.dart';
+import 'package:dawini/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -58,6 +59,9 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
                   qrCodeText = value;
                 },
                 validator: (String? value) {
+                  if (!value!.startsWith('ch')) {
+                    return invalideNameCodeQR;
+                  }
                   return null;
                 },
               ),
