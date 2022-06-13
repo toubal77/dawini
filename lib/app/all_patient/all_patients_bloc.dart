@@ -18,4 +18,11 @@ class AllPatientsBloc {
       ),
     );
   }
+
+  Stream<List<Patient>> getAllPatientSearch() {
+    return database.streamCollection(
+      path: APIPath.newPatientCollection(),
+      builder: (data, documentId) => Patient.fromMap(data, documentId),
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
 import 'package:dawini/app/all_patient/all_patients_bloc.dart';
+import 'package:dawini/app/all_patient/search_patient/search_screen.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_screen.dart';
 import 'package:dawini/common_widgets/empty_content.dart';
@@ -22,6 +23,7 @@ class AllPatientScreen extends StatefulWidget {
 class _AllPatientScreenState extends State<AllPatientScreen> {
   late final AllPatientsBloc bloc;
   late Stream<List<Patient>?> allPatient;
+  late Stream<List<Patient>?> allPatientSearch;
   late List<Patient>? allPatients;
   late String search = '';
   @override
@@ -31,6 +33,7 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
       database: database,
     );
     allPatient = bloc.getAllPatients();
+    allPatientSearch = bloc.getAllPatientSearch();
     super.initState();
   }
 
@@ -99,6 +102,17 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
           ),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: DataSearch(allPatientSearch: allPatientSearch),
+              );
+            },
+            icon: const Icon(
+              Icons.search,
+            ),
+          ),
           IconButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: ((context) {
