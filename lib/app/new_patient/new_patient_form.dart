@@ -37,6 +37,7 @@ class NewPatientForm extends StatefulWidget {
     required String? prenom,
     required int? age,
     required int sixe,
+    required String? diagnostic,
     required String? room,
     required List<dynamic>? antecedentsMedicaux,
     required List<dynamic>? antecedentsChirurgicaux,
@@ -57,6 +58,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late String? nom = '';
   late String? prenom = '';
   late String? room = 'room';
+  late String? diagnostic = '';
   late int? age = 0;
   late int sixe = 0;
   late bool checkk = false;
@@ -96,6 +98,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
       prenom = widget.patient!.prenom;
       age = widget.patient!.age;
       sixe = widget.patient!.sixe;
+      diagnostic = widget.patient!.diagnostic;
       if (sixe == 2) {
         hommeBool = true;
       } else if (sixe == 1) {
@@ -300,6 +303,23 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             // } else
                             // if (!Validators.isValidNumber(value)) {
                             //   return invalidAgeTypeError;
+                            // }
+
+                            return null;
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        child: CustomTextForm(
+                          title: 'Diagnostic:',
+                          initialValue: nom,
+                          textInputAction: TextInputAction.done,
+                          onChanged: (var value) {
+                            diagnostic = value;
+                          },
+                          validator: (String? value) {
+                            // if (value!.isEmpty) {
+                            //   return invalidNameError;
                             // }
 
                             return null;
@@ -672,6 +692,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             if (nom != '' ||
                                 prenom != '' ||
                                 age != 0 ||
+                                diagnostic != '' ||
                                 antecedentsMedicaux!.isNotEmpty ||
                                 antecedentsChirurgicaux!.isNotEmpty ||
                                 signeFonctionnelList!.isNotEmpty ||
@@ -685,6 +706,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 age: age ?? age,
                                 sixe: sixe,
                                 room: room,
+                                diagnostic: diagnostic ?? diagnostic,
                                 antecedentsMedicaux:
                                     antecedentsMedicaux ?? antecedentsMedicaux,
                                 antecedentsChirurgicaux:

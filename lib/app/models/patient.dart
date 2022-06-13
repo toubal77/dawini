@@ -13,12 +13,14 @@ class Patient {
     required this.examenBiologique,
     required this.imagerie,
     required this.consigne,
+    required this.diagnostic,
   });
 
   final String id;
   final String? room;
   final String? nom;
   final String? prenom;
+  final String? diagnostic;
   final int? age;
   final int sixe;
   final List<dynamic>? antecedentsMedicaux;
@@ -34,6 +36,7 @@ class Patient {
     final String? room = data['room'] as String?;
     final String? nom = data['nom'] as String?;
     final String? prenom = data['prenom'] as String?;
+    final String? diagnostic = data['diagnostic'] as String?;
     final int? age = data['age'] as int?;
     final int sixe = data['sixe'] as int;
     final List<dynamic>? antecedentsMedicaux =
@@ -52,6 +55,7 @@ class Patient {
       signeFonctionnel: signeFonctionnel,
       antecedentsChirurgicaux: antecedentsChirurgicaux,
       antecedentsMedicaux: antecedentsMedicaux,
+      diagnostic: diagnostic,
       nom: nom,
       sixe: sixe,
       examenClinique: examenClinique,
@@ -71,6 +75,7 @@ class Patient {
       "antecedentsMedicaux": antecedentsMedicaux,
       "sixe": sixe,
       "nom": nom,
+      "diagnostic": diagnostic,
       "examenClinique": examenClinique,
       "imagerie": imagerie,
       "examenBiologique": examenBiologique,
