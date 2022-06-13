@@ -12,6 +12,10 @@ class AllPatientsBloc {
     return database.streamCollection(
       path: APIPath.newPatientCollection(),
       builder: (data, documentId) => Patient.fromMap(data, documentId),
+      queryBuilder: (query) => query.where(
+        'room',
+        isNotEqualTo: 'room',
+      ),
     );
   }
 }
