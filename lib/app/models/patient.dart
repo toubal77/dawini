@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Patient {
   Patient({
     required this.id,
@@ -14,6 +16,7 @@ class Patient {
     required this.imagerie,
     required this.consigne,
     required this.diagnostic,
+    required this.createdAt,
   });
 
   final String id;
@@ -30,6 +33,7 @@ class Patient {
   final Map? examenBiologique;
   final List<dynamic>? imagerie;
   final List<dynamic>? consigne;
+  final Timestamp createdAt;
 
   factory Patient.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
@@ -48,7 +52,8 @@ class Patient {
     final Map? examenBiologique = data['examenBiologique'] as Map?;
     final List<dynamic>? imagerie = data['imagerie'] as List<dynamic>?;
     final List<dynamic>? consigne = data['consigne'] as List<dynamic>?;
-
+    final Timestamp createdAt =
+        data['createdAt'] as Timestamp? ?? Timestamp.now();
     return Patient(
       id: id,
       age: age,
@@ -63,6 +68,7 @@ class Patient {
       examenBiologique: examenBiologique,
       prenom: prenom,
       room: room,
+      createdAt: createdAt,
       consigne: consigne,
     );
   }
@@ -81,7 +87,8 @@ class Patient {
       "examenBiologique": examenBiologique,
       "prenom": prenom,
       "room": room,
-      'consigne': consigne,
+      "consigne": consigne,
+      "createdAt": createdAt,
     };
   }
 }

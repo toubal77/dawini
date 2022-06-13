@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
 import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
@@ -45,6 +46,7 @@ class NewPatientForm extends StatefulWidget {
     required Map? examenClinique,
     required Map? examenBiologique,
     required List<dynamic>? imagerieList,
+    required Timestamp createdAt,
   }) onSaved;
   final NewPatientBloc bloc;
   final Patient? patient;
@@ -89,7 +91,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
   late List<dynamic>? imagerie = [];
   late String imagerieString;
   late String typeImagerie;
-
+  late Timestamp createdAt;
   @override
   void initState() {
     if (widget.patient != null) {
@@ -98,12 +100,14 @@ class _NewPatientFormState extends State<NewPatientForm> {
       prenom = widget.patient!.prenom;
       age = widget.patient!.age;
       sixe = widget.patient!.sixe;
+
       diagnostic = widget.patient!.diagnostic;
       if (sixe == 2) {
         hommeBool = true;
       } else if (sixe == 1) {
         femmeBool = true;
       }
+      createdAt = widget.patient!.createdAt;
       antecedentsMedicaux = widget.patient!.antecedentsMedicaux;
       antecedentsChirurgicaux = widget.patient!.antecedentsChirurgicaux;
       signeFonctionnel = widget.patient!.signeFonctionnel;
@@ -688,7 +692,9 @@ class _NewPatientFormState extends State<NewPatientForm> {
                             if (femmeBool) {
                               sixe = 1;
                             }
-
+                            if (widget.patient == null) {
+                              createdAt = Timestamp.now();
+                            }
                             if (nom != '' ||
                                 prenom != '' ||
                                 age != 0 ||
@@ -719,6 +725,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
                                 examenBiologique:
                                     examenBiologique ?? examenBiologique,
                                 imagerieList: imagerieList ?? imagerieList,
+                                createdAt: createdAt,
                               );
                             } else {
                               Fluttertoast.showToast(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_bloc.dart';
 import 'package:dawini/app/new_patient/new_patient_form.dart';
@@ -98,6 +99,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               required Map? examenClinique,
               required Map? examenBiologique,
               required List<dynamic>? imagerieList,
+              required Timestamp createdAt,
             }) {
               nom = nom;
               prenom = prenom;
@@ -112,6 +114,7 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
               imagerieList = imagerieList;
               id = id;
               room = room;
+              createdAt = createdAt;
               Patient patient = Patient(
                 age: age,
                 antecedentsChirurgicaux: antecedentsChirurgicaux,
@@ -127,6 +130,8 @@ class _NewPatientScreenState extends State<NewPatientScreen> {
                 prenom: prenom,
                 signeFonctionnel: signeFonctionnel,
                 consigne: [],
+                createdAt: createdAt,
+                //Timestamp.now()
               );
               sendInfo(patient);
             },

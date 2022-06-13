@@ -88,6 +88,7 @@ class _AddConsigneScreenState extends State<AddConsigneScreen> {
             }) {
               consigneList = consigneList;
               Patient patient = Patient(
+                createdAt: widget.patient!.createdAt,
                 age: widget.patient!.age,
                 antecedentsChirurgicaux:
                     widget.patient!.antecedentsChirurgicaux,
