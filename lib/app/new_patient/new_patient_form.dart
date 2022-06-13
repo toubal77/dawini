@@ -100,7 +100,7 @@ class _NewPatientFormState extends State<NewPatientForm> {
       prenom = widget.patient!.prenom;
       age = widget.patient!.age;
       sixe = widget.patient!.sixe;
-
+      room = widget.patient!.room;
       diagnostic = widget.patient!.diagnostic;
       if (sixe == 2) {
         hommeBool = true;
