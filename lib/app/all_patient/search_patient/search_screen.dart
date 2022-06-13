@@ -110,6 +110,7 @@ class DataSearch extends SearchDelegate<String> {
                                 DataCell(Text(player.room!)),
                                 DataCell(Text(player.nom!)),
                                 DataCell(Text(player.prenom!)),
+                                DataCell(Text(player.diagnostic!)),
                                 DataCell(player.sixe != 0
                                     ? player.sixe == 2
                                         ? const Icon(Icons.man,

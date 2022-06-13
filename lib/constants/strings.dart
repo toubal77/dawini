@@ -39,6 +39,10 @@ const List<DataColumn> columnTableList = [
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
+    label: Text('Diagnostic',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  ),
+  DataColumn(
     label: Text('Sixe',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
   ),
