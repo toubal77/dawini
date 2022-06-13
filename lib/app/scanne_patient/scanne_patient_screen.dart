@@ -41,6 +41,17 @@ class _ScannerPatientScreenState extends State<ScannerPatientScreen> {
               height: 250.h,
             ),
           if (createdQR)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text(
+                  'ce code QR signifier: $qrCodeText',
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+          if (createdQR)
             GestureDetector(
               onTap: () async {
                 setState(() {
