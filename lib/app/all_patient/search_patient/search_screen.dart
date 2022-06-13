@@ -75,6 +75,11 @@ class DataSearch extends SearchDelegate<String> {
                             patientsSearch.add(patients[i]);
                           }
                         }
+                        if (query.startsWith('ch')) {
+                          if (patients[i].room!.startsWith(query)) {
+                            patientsSearch.add(patients[i]);
+                          }
+                        }
                       }
                     } else {
                       patientsSearch = patients;
