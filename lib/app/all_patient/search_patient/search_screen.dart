@@ -87,8 +87,8 @@ class DataSearch extends SearchDelegate<String> {
                       patientsSearch = patients;
                     }
                     return DataTable(
-                      columnSpacing: 0,
-                      horizontalMargin: 0,
+                      columnSpacing: 10,
+                      horizontalMargin: 10,
                       columns: columnTableList,
                       rows: patientsSearch
                           .map(
