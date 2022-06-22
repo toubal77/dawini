@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
+import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/new_patient_screen.dart';
 import 'package:dawini/common_widgets/empty_content.dart';
@@ -10,7 +11,8 @@ import 'package:provider/provider.dart';
 
 class DataSearch extends SearchDelegate<String> {
   Stream<List<Patient>?> allPatientSearch;
-  DataSearch({required this.allPatientSearch});
+  final AllPatientsBloc bloc;
+  DataSearch({required this.allPatientSearch, required this.bloc});
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -124,6 +126,17 @@ class DataSearch extends SearchDelegate<String> {
                                             color: Colors.pink)
                                     : const Text('null')),
                                 DataCell(Text(player.age.toString())),
+                                DataCell(
+                                  IconButton(
+                                    onPressed: () {
+                                      bloc.removePatient(player);
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           )

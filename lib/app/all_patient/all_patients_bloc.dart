@@ -25,4 +25,10 @@ class AllPatientsBloc {
       builder: (data, documentId) => Patient.fromMap(data, documentId),
     );
   }
+
+  Future<void> removePatient(Patient patient) {
+    return database.deleteDocument(
+      path: APIPath.newPatientDocument(patient.id),
+    );
+  }
 }

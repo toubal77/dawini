@@ -106,7 +106,8 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
             onPressed: () {
               showSearch(
                 context: context,
-                delegate: DataSearch(allPatientSearch: allPatientSearch),
+                delegate:
+                    DataSearch(allPatientSearch: allPatientSearch, bloc: bloc),
               );
             },
             icon: const Icon(
@@ -179,6 +180,17 @@ class _AllPatientScreenState extends State<AllPatientScreen> {
                                           color: Colors.pink)
                                   : const Text('null')),
                               DataCell(Text(player.age.toString())),
+                              DataCell(
+                                IconButton(
+                                  onPressed: () {
+                                    bloc.removePatient(player);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         )

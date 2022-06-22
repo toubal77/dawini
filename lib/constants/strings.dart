@@ -50,6 +50,11 @@ const List<DataColumn> columnTableList = [
     label: Text('Age',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
   ),
+  DataColumn(
+    label: Text('Supprime',
+        style: TextStyle(
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red)),
+  ),
 ];
 const List<String> antecedentsMedicauxListName = [
   'Maladies cardiovasculaires',
