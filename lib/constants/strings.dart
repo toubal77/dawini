@@ -24,36 +24,36 @@ const Map<String, List<dynamic>> imagerieTypeMap = {
 const List<DataColumn> columnTableList = [
   DataColumn(
     label: Text('Consigne',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
     label: Text('Chambre / Lit',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
     label: Text('Nom',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
     label: Text('Prenom',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
     label: Text('Diagnostic',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
     label: Text('Sixe',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
     label: Text('Age',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
   ),
   DataColumn(
     label: Text('Supprime',
         style: TextStyle(
-            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red)),
+            fontSize: 12, fontWeight: FontWeight.bold, color: Colors.red)),
   ),
 ];
 const List<String> antecedentsMedicauxListName = [
