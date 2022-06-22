@@ -1,8 +1,6 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
-import 'package:dawini/app/all_patient/all_patients_bloc.dart';
+
 import 'package:dawini/app/models/patient.dart';
 import 'package:dawini/app/new_patient/image_to_text.dart';
 import 'package:dawini/app/new_patient/new_patient_bloc.dart';
@@ -753,7 +751,6 @@ class _NewPatientFormState extends State<NewPatientForm> {
   }
 
   Future<dynamic> showAM(BuildContext context) {
-    var expanded = false;
     return showDialog(
       context: context,
       builder: (BuildContext context) {

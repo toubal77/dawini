@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dawini/app/all_patient/add_consigne/add_consigne_screen.dart';
 import 'package:dawini/app/all_patient/all_patients_bloc.dart';
 import 'package:dawini/app/models/patient.dart';
@@ -7,7 +6,6 @@ import 'package:dawini/common_widgets/empty_content.dart';
 import 'package:dawini/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 class DataSearch extends SearchDelegate<String> {
   Stream<List<Patient>?> allPatientSearch;
